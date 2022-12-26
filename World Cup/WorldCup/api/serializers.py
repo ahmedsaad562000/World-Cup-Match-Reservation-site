@@ -1,12 +1,12 @@
 
 from curses import meta
-from html5lib import serialize
+
 
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from accounts.models import User
 from matches.models import Stadiums , Matches , Teams , Tickets , Refrees
-
+from django.db import models
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,11 +34,12 @@ class MatchesSerializer(serializers.ModelSerializer):
         fields="__all__"
 
 class Tickets_print_Serializer(serializers.ModelSerializer):
-        h_team = MatchesSerializer.SlugRelatedField(many=False,read_only=True,slug_field='h_team');
-        a_team = MatchesSerializer.SlugRelatedField(many=False,read_only=True,slug_field='a_team');
-        stadium = StadiumsSerializer.SlugRelatedField(many=False,read_only=True,slug_field='name');  
-        date = MatchesSerializer.SlugRelatedField(many=False,read_only=True,slug_field='date');
-        time = MatchesSerializer.SlugRelatedField(many=False,read_only=True,slug_field='time');
+        h_team = serializers.CharField(source='Matches.h_team');
+        a_team = serializers.CharField(source='Matches.a_team');
+        stadium = serializers.CharField(source='Matches.stadium');  
+        date = serializers.DateField(source='Matches.date');
+        time = serializers.TimeField(source='Matches.time');
+        
         class Meta:
             model = Tickets
             fields = ['id' ,'h_team' , 'a_team' , 'stadium' ,'date' ,'time','row','seat']
