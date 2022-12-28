@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'matches',
     'api'
 ]
 
@@ -97,8 +98,8 @@ DATABASES = {
 ###################33
 ##authentication
 AUTHENTICATION_BACKENDS = [
-    #'django.contrib.auth.backends.ModelBackend', # This is the default that allows us to log in via username
-    'accounts.approve.ApprovedAuthBackend'
+    'django.contrib.auth.backends.ModelBackend', # This is the default that allows us to log in via username
+    #'accounts.approve.ApprovedAuthBackend'
 ]
 
 
