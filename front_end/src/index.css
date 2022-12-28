@@ -62,7 +62,7 @@
   width: 30rem;
   z-index: 10;
   position: fixed;
-  top: 20vh;
+  top: 10vh;
   left: calc(50% - 15rem);
 }
 

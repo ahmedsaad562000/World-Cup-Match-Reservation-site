@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
+import Layout from '../Components/layout/Layout';
 
 import NewStadiumForm from '../Components/meetups/NewStadiumForm'
 
 
-function NewStaium()
-{
+function NewStaium() {
   const history = useNavigate();
 
   function addStadupHandler(meetupData) {
@@ -22,13 +22,15 @@ function NewStaium()
     });
   }
 
-    return(
-        <section>
+  return (
+    <Layout>
+      <section>
         <h1>Add Stadium</h1>
         <NewStadiumForm onAddMeetup={addStadupHandler} />
       </section>
-    );
-  
+    </Layout>
+  );
+
 }
 
 export default NewStaium;

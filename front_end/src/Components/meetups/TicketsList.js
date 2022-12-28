@@ -1,11 +1,11 @@
-import MatchInfoItem from './MatchInfoItem';
+import BouhgtTickets from './boughtTickets';
 import classes from './MeetupList.module.css';
 
-function MatchInfoList(props) {
+function TicketsList(props) {
   return (
     <ul className={classes.list}>
       {props.meetups.map((meetup) => (
-        <MatchInfoItem
+        <BouhgtTickets
           key={meetup.id}
           id={meetup.id}  // Match ID Est5dmha zy ma heya
           username={meetup.username}
@@ -19,4 +19,4 @@ function MatchInfoList(props) {
   );
 }
 
-export default MatchInfoList;
+export default TicketsList;

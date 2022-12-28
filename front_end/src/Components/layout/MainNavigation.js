@@ -1,15 +1,14 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import TicketsContext from '../../pages/store/UserTickets_Context';
 
 import classes from './MainNavigation.module.css';
 
 function MainNavigation(props) {
- 
-  const navigate = useNavigate();
-  function NavigateHandler(url){
-    navigate(url);
-  } 
+
+  const BoughtTickets = useContext(TicketsContext);
+
   const [Manager, Setmanager] = useState(false);
   const [Fan, SetFan] = useState(false);
   function Manag() {
@@ -19,12 +18,12 @@ function MainNavigation(props) {
     SetFan(true);
   }
 
-  function CheckUser(){
-    
+  function CheckUser() {
+
   }
 
   function WhatUser() {
-    if (!Manager) {
+    if (Manager) {
       return (
         <header className={classes.header}>
           <div className={classes.logo}>Welcome To Qatar</div>
@@ -54,9 +53,9 @@ function MainNavigation(props) {
         </header>
       );
 
-    } 
-    
-    else if (Fan) {
+    }
+
+    else if (!Fan) {
       return (
         <header className={classes.header}>
           <div className={classes.logo}>Welcome To Qatar</div>
@@ -67,15 +66,18 @@ function MainNavigation(props) {
               </li>
 
               <li>
+                <Link to='/Profile'>Profile</Link>
+              </li>
+
+              
+              <li>
                 <Link to='/Matches'>Matches</Link>
               </li>
 
               <li>
-                <Link to='/YourTickets'>Your Tickets</Link>
-              </li>
-
-              <li>
-                <Link to='/Profile'>Profile</Link>
+                <Link to='/YourTickets'>Your Tickets
+                <span className={classes.badge}>{BoughtTickets.totaltickets}</span>
+                </Link>
               </li>
 
               <li>

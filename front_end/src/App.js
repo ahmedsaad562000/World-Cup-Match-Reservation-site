@@ -9,7 +9,6 @@ import MatchesPage from "./pages/Matches"
 import Profile from "./pages/Profile"
 import NewMatch from "./pages/NewMatch"
 import YourTickets from "./pages/YourTickets"
-import Layout from "./Components/layout/Layout"
 
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
 
   /*Routing Code */
   return (
-    <Layout>
+
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/Home' element={<AllMeetupsPage />} />
@@ -34,7 +33,7 @@ function App() {
         <Route path='/NewMatch' element={<NewMatch />} />
         <Route path='/YourTickets' element={<YourTickets />} />
       </Routes>
-    </Layout>
+    
   );
 
 }

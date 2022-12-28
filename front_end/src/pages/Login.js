@@ -67,7 +67,7 @@ function Login(props) {
                                     <div className="options_type">
                                         <div className="type">
                                             <input type="radio" id="female" value="female" name="gender" />
-                                            <label htmlFor="female" style={{ color: "white" }}>Female</label>
+                                            <label htmlFor="female" style={{ color: "white" , marginRight: "20px"}}>Female</label>
                                             <input type="radio" id="male" value="male" name="gender" />
                                             <label htmlFor="male" style={{ color: "white" }}>Male</label>
                                         </div>
