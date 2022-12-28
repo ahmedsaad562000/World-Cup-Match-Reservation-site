@@ -1,5 +1,4 @@
 function ShowMore(props) {
-    
     return (
         <div className="ShowMore">
             <p>{props.text}</p>

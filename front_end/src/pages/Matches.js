@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
+import Layout from '../Components/layout/Layout';
 import MatchInfoList from '../Components/meetups/MatcchInfoList'
 
-function MatchesPage()
-{
-    const [isLoading, setIsLoading] = useState(true);
+function MatchesPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      'https://test-database-c863c-default-rtdb.firebaseio.com//meetups.json'
+      'http://localhost:8000/api/users'
     )
       .then((response) => {
         return response.json();
@@ -33,17 +33,21 @@ function MatchesPage()
 
   if (isLoading) {
     return (
-      <section>
-        <p>Loading...</p>
-      </section>
+      <Layout>
+        <section>
+          <p>Loading...</p>
+        </section>
+      </Layout>
     );
   }
-    return (
-        <section>
-          <h1>Matches</h1>
-          <MatchInfoList meetups={loadedMeetups} />
-        </section>
-      );
+  return (
+    <Layout>
+      <section>
+        <h1>Matches</h1>
+        <MatchInfoList meetups={loadedMeetups} />
+      </section>
+    </Layout>
+  );
 }
 
 export default MatchesPage;

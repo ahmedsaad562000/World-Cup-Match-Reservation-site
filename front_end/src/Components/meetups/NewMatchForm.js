@@ -12,17 +12,19 @@ function NewMatchForm(props) {
     const awayTeamRef = useRef();
     const stadiumRef = useRef();
     const dateRef = useRef();
+    const timeRef = useRef();
     const mainRefreeRef = useRef();
     const lineManOneRef = useRef();
     const lineManTwoRef = useRef();
 
     function submitHandler(event) {
         event.preventDefault();
-
+        
         const HomeTeam = homeTeamRef.current.value;
         const AwayTeam = awayTeamRef.current.value;
         const Stadium = stadiumRef.current.value;
         const MatchDate = dateRef.current.value;
+        const MatchTime = timeRef.current.value;
         const MainRefree = mainRefreeRef.current.value;
         const LineManone = lineManOneRef.current.value;
         const LineManTwo = lineManTwoRef.current.value;
@@ -32,6 +34,7 @@ function NewMatchForm(props) {
             Ateam: AwayTeam,
             Stad: Stadium,
             Mdate: MatchDate,
+            Mtime: MatchTime,
             MainRef: MainRefree,
             LineManOne: LineManone,
             LineManTwo: LineManTwo,
@@ -41,30 +44,32 @@ function NewMatchForm(props) {
         props.onConfirm();
     }
 
-    function EditHandler(event) {
-        event.preventDefault();
+    // function EditHandler(event) {
+    //     event.preventDefault();       
 
-        const HomeTeam = homeTeamRef.current.value;
-        const AwayTeam = awayTeamRef.current.value;
-        const Stadium = stadiumRef.current.value;
-        const MatchDate = dateRef.current.value;
-        const MainRefree = mainRefreeRef.current.value;
-        const LineManone = lineManOneRef.current.value;
-        const LineManTwo = lineManTwoRef.current.value;
+    //     const HomeTeam = homeTeamRef.current.value;
+    //     const AwayTeam = awayTeamRef.current.value;
+    //     const Stadium = stadiumRef.current.value;
+    //     const MatchDate = dateRef.current.value;
+    //     const MatchTime = timeRef.current.value;
+    //     const MainRefree = mainRefreeRef.current.value;
+    //     const LineManone = lineManOneRef.current.value;
+    //     const LineManTwo = lineManTwoRef.current.value;
 
-        const meetupData = {
-            Hteam: HomeTeam,
-            Ateam: AwayTeam,
-            Stad: Stadium,
-            Mdate: MatchDate,
-            MainRef: MainRefree,
-            LineManOne: LineManone,
-            LineManTwo: LineManTwo,
-        };
+    //     const meetupData = {
+    //         Hteam: HomeTeam,
+    //         Ateam: AwayTeam,
+    //         Stad: Stadium,
+    //         Mdate: MatchDate,
+    //         Mtime: MatchTime,
+    //         MainRef: MainRefree,
+    //         LineManOne: LineManone,
+    //         LineManTwo: LineManTwo,
+    //     };
 
-        props.onAddMeetup(meetupData);
-        props.onConfirm();
-    }
+    //     props.onAddMeetup(meetupData);
+    //     props.onConfirm();
+    // }
 
     
     return (
@@ -83,8 +88,12 @@ function NewMatchForm(props) {
                     <input type='text' required id='Stad' ref={stadiumRef} />
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='Mdate'><span className={classes.vip}>VIP</span> Match Date</label>
+                    <label htmlFor='Mdate'><span className={classes.vip}>Match</span> Date</label>
                     <input type='date' required id='Mdate' ref={dateRef} />
+                </div>
+                <div className={classes.control}>
+                    <label htmlFor='Mtime'><span className={classes.vip}>Match</span> Time</label>
+                    <input type='time' required id='Mtime' ref={timeRef} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='MainRef'><span className={classes.vip}>Main</span> Refree</label>

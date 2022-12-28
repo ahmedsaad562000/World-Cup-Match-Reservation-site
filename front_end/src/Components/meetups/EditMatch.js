@@ -5,7 +5,7 @@ function EditMatch(props) {
 
     const history = useNavigate();
 
-    function addMatchupHandler(meetupData) {
+    function editMatchupHandler(meetupData) {
       fetch(
         'https://test-database-c863c-default-rtdb.firebaseio.com/meetups.json',
         {
@@ -27,7 +27,7 @@ function EditMatch(props) {
     
     return (
         <div className="ShowMore">
-            <NewMatchForm onConfirm={confirmHandler} onAddMeetup={addMatchupHandler} text="Edit Match"/>
+            <NewMatchForm onConfirm={confirmHandler} onAddMeetup={editMatchupHandler} text="Edit Match"/>
         </div>
     );
 }

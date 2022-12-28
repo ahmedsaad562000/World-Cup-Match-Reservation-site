@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
+import Layout from '../Components/layout/Layout';
 
 import NewMatchForm from '../Components/meetups/NewMatchForm'
 
 
-function NewMatch()
-{
+function NewMatch() {
   const history = useNavigate();
 
   function addMatchupHandler(meetupData) {
     fetch(
-      'https://test-database-c863c-default-rtdb.firebaseio.com/meetups.json',
+      'http://localhost:8000/api/adduser',
       {
         method: 'POST',
         body: JSON.stringify(meetupData),
@@ -17,18 +17,27 @@ function NewMatch()
           'Content-Type': 'application/json',
         },
       }
-    ).then(() => {
-      history('/Matches');
+    ).then((res) => {
+      if (res.status === 500 || res.status === 404) {
+        console.log("error");
+      }
+      else {
+        history('/Matches');
+      }
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
-    return(
-        <section>
+  return (
+    <Layout>
+      <section>
         <h1>Add Match</h1>
-        <NewMatchForm onAddMeetup={addMatchupHandler} text="Add Match"/>
+        <NewMatchForm onAddMeetup={addMatchupHandler} text="Add Match" />
       </section>
-    );
-  
+    </Layout>
+  );
+
 }
 
 export default NewMatch;
