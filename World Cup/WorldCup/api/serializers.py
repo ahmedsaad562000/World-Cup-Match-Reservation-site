@@ -26,7 +26,7 @@ class TeamsSerializer(serializers.ModelSerializer):
 class TeamslinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teams
-        fields=['link']
+        fields="__all__"
 
 class RefreesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,24 +34,27 @@ class RefreesSerializer(serializers.ModelSerializer):
         fields=['name']
 
 class MatchesSerializer(serializers.ModelSerializer):
-    h_team_link = TeamslinkSerializer(source='h_team', many=False)
-    a_team_link = TeamslinkSerializer(source='a_team', many=False)
+    H_team = TeamslinkSerializer(source='h_team', many=False)
+    A_team = TeamslinkSerializer(source='a_team', many=False)
     class Meta:
         model = Matches
 
-        fields=['id' , 'date' ,'time' ,'h_team' ,'h_team_link','a_team' ,'a_team_link' ,'ref' ,'line1' ,'line2' , 'stadium']
+        fields=['id' , 'date' ,'time' , 'stadium' ,'H_team','A_team' ,'ref' ,'line1' ,'line2']
+
+class Matches_Tickets_Serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Matches
+
+        fields=['id' , 'date' ,'time' , 'stadium' ,'h_team','a_team']
+
 
 class Tickets_print_Serializer(serializers.ModelSerializer):
-        h_team = serializers.CharField(source='Matches.h_team');
-        a_team = serializers.CharField(source='Matches.a_team');
-        stadium = serializers.CharField(source='Matches.stadium');  
-        date = serializers.DateField(source='Matches.date');
-        time = serializers.TimeField(source='Matches.time');
-        
+        match_info = Matches_Tickets_Serializer(source='match', many=False)
         class Meta:
             model = Tickets
-            fields = ['id' ,'h_team' , 'a_team' , 'stadium' ,'date' ,'time','row','seat']
-
+            fields = ['id' ,'match_info','row','seat']
+            ##add no. 
 class Tickets_add_Serializer(serializers.ModelSerializer):
         class Meta:
             model = Tickets

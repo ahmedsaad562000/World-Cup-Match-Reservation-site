@@ -22,16 +22,20 @@ from api import approve, serializers
 def apiOverview(request):
 	api_urls = {
         'Users':'-----------------------------------------',
-		'UserList':'/users/',
-		'GetUser':'/getuser/<str:name>/',
-		'ADD':'/adduser/',
-		'Update':'/updateuser/<str:name>/',
-		'Delete':'/deleteuser/<str:name>/',
+		'UserList':'/users',
+		'GetUser':'/getuser/<str:name>',
+		'ADD':'/adduser',
+		'Update':'/updateuser/<str:name>',
+		'Delete':'/deleteuser/<str:name>',
         'login' : '/login/<str:name>&<str:password>',
-		'Matches':'----------------------------------------',
-        'Get_All_Teams':'/teams/',
-        'Get_All_Refs':'/refs/',
-        'Get_All_matches':'/matches/'
+		'Stadiums':'----------------------------------------',
+        'Add_New_Stadium':'/addstadium',
+        'Matches':'----------------------------------------',
+        'Get_All_Teams':'/teams',
+        'Get_All_Refs':'/refs',
+        'Get_All_matches':'/matches',
+        'Get_Tickets_of_a_user':'tickets/<str:name>',
+        'Delete_Ticket':'deleteticket/<int:ticketid>',
         }
 
 	return Response(api_urls)
