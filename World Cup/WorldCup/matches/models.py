@@ -10,7 +10,7 @@ from tkinter import CASCADE
 
 class Teams(models.Model):
     name = models.CharField(max_length=30 , unique=True, primary_key=True);
-    link = models.TextField(validators=[URLValidator()] , null=True);
+    link = models.URLField(null=True);
     def __str__(self):
         return self.name
 

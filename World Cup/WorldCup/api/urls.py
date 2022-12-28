@@ -14,8 +14,10 @@ urlpatterns = [
     path('updateuser/<str:name>/',views.UpdateUser,name="updateuser"),
     path('deleteuser/<str:name>/',views.DeleteUser,name="deleteuser"),
     path('login/<str:name>&<str:password>',views.login,name="login"),
+    
     ##############################################################
     #Matches
-    
-    
+    path('teams/',matches_views.TeamsList,name="teams"),
+    path('refs/',matches_views.RefList,name="refs"),
+    path('matches/',matches_views.matchesList,name="matches")
 ]

@@ -21,17 +21,25 @@ class StadiumsSerializer(serializers.ModelSerializer):
 class TeamsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teams
-        fields="__all__"
+        fields=['name']
+
+class TeamslinkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teams
+        fields=['link']
 
 class RefreesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Refrees
-        fields="__all__"
+        fields=['name']
 
 class MatchesSerializer(serializers.ModelSerializer):
+    h_team_link = TeamslinkSerializer(source='h_team', many=False)
+    a_team_link = TeamslinkSerializer(source='a_team', many=False)
     class Meta:
         model = Matches
-        fields="__all__"
+
+        fields=['id' , 'date' ,'time' ,'h_team' ,'h_team_link','a_team' ,'a_team_link' ,'ref' ,'line1' ,'line2' , 'stadium']
 
 class Tickets_print_Serializer(serializers.ModelSerializer):
         h_team = serializers.CharField(source='Matches.h_team');

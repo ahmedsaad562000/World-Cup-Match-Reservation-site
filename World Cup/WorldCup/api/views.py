@@ -21,13 +21,18 @@ from api import approve, serializers
 @api_view(['GET','POST'])
 def apiOverview(request):
 	api_urls = {
+        'Users':'-----------------------------------------',
 		'UserList':'/users/',
 		'GetUser':'/getuser/<str:name>/',
 		'ADD':'/adduser/',
 		'Update':'/updateuser/<str:name>/',
 		'Delete':'/deleteuser/<str:name>/',
-        'login' : '/login/<str:name>&<str:password>'
-		}
+        'login' : '/login/<str:name>&<str:password>',
+		'Matches':'----------------------------------------',
+        'Get_All_Teams':'/teams/',
+        'Get_All_Refs':'/refs/',
+        'Get_All_matches':'/matches/'
+        }
 
 	return Response(api_urls)
 
