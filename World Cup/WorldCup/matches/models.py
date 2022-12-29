@@ -36,17 +36,20 @@ class Matches(models.Model):
     stadium =  models.ForeignKey(Stadiums ,on_delete=models.SET_DEFAULT ,default="sub_stadium");
     date = models.DateField();
     time = models.TimeField();
+    stage = models.CharField(max_length=30 , null=True);
     ref = models.ForeignKey(Refrees,related_name='ref' ,on_delete=models.SET_DEFAULT , default = "sub_refree");
     line1 = models.ForeignKey(Refrees,related_name='line1', on_delete=models.SET_DEFAULT , default = "sub_refree1");
     line2 = models.ForeignKey(Refrees, on_delete=models.SET_DEFAULT, default = "sub_refree2");
     class Meta:
-        unique_together = ('h_team', 'a_team','stadium','date','time','ref','line1','line2');
+        unique_together = ('h_team', 'a_team','stadium','date','time', 'stage','ref','line1','line2');
 
 class Tickets(models.Model):
     match = models.ForeignKey(Matches , on_delete=models.CASCADE);
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE);
     row = models.SmallIntegerField();
     seat = models.SmallIntegerField();
+    class Meta:
+        unique_together = ('match', 'user','row','seat');
 
 
 

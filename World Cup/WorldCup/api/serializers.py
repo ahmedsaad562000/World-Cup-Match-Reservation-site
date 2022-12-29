@@ -1,6 +1,6 @@
 
 from curses import meta
-
+from rest_framework.validators import UniqueTogetherValidator
 
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -17,6 +17,14 @@ class StadiumsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stadiums
         fields=['name','rows','seats_per_row','link','description']
+
+class Stadiums_Names_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stadiums
+        fields=['name']
+
+
+
 
 class TeamsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,9 +46,15 @@ class MatchesSerializer(serializers.ModelSerializer):
     A_team = TeamslinkSerializer(source='a_team', many=False)
     class Meta:
         model = Matches
+        fields=['id' , 'date' ,'time' , 'stadium' ,'H_team','A_team' ,'stage','ref' ,'line1' ,'line2']
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Matches.objects.all(),
+                fields=['date', 'time' , 'stadium']
+            )
+        ]        
 
-        fields=['id' , 'date' ,'time' , 'stadium' ,'H_team','A_team' ,'ref' ,'line1' ,'line2']
-
+        
 class Matches_Tickets_Serializer(serializers.ModelSerializer):
 
     class Meta:
@@ -59,6 +73,10 @@ class Tickets_add_Serializer(serializers.ModelSerializer):
         class Meta:
             model = Tickets
             fields = ['match' , 'user' ,'row','seat']
+class seatsSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Tickets
+            fields = ['row','seat']
 
 
 

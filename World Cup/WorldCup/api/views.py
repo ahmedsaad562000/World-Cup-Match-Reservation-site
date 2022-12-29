@@ -28,6 +28,8 @@ def apiOverview(request):
 		'Update':'/updateuser/<str:name>',
 		'Delete':'/deleteuser/<str:name>',
         'login' : '/login/<str:name>&<str:password>',
+        'approved_users':'/appusers',
+        'approved_users':'/unappusers',
 		'Stadiums':'----------------------------------------',
         'Add_New_Stadium':'/addstadium',
         'Matches':'----------------------------------------',
@@ -111,6 +113,7 @@ def login(request , name , password):
                 pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
                 
                 return Response({
+                    "id" : user.id,
                     "username" : user.username,
                     "role" : user.role
                 });
@@ -118,5 +121,17 @@ def login(request , name , password):
                 return Response(status=status.HTTP_401_UNAUTHORIZED);    
         else:
             return Response(status=status.HTTP_403_FORBIDDEN);
+
+@api_view(['GET'])
+def ApprovedUserList(request):
+    users = userview.objects.filter(Q(approved=True) , Q(role='F') | Q(role='M') )
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def UnapprovedUserList(request):
+    users = userview.objects.filter(Q(approved=False) , Q(role='F') | Q(role='M') )
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 

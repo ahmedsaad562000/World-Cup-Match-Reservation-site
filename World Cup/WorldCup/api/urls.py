@@ -14,7 +14,8 @@ urlpatterns = [
     path('updateuser/<str:name>/',views.UpdateUser,name="updateuser"),
     path('deleteuser/<str:name>/',views.DeleteUser,name="deleteuser"),
     path('login/<str:name>&<str:password>',views.login,name="login"),
-    
+    path('appusers/',views.ApprovedUserList,name="appusers"),
+    path('unappusers/',views.UnapprovedUserList,name="unappusers"),
     ##############################################################
     #Matches&Tickets
     path('teams/',matches_views.TeamsList,name="teams"),
