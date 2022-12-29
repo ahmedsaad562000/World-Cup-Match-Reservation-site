@@ -22,16 +22,30 @@ from api import approve, serializers
 def apiOverview(request):
 	api_urls = {
         'Users':'-----------------------------------------',
-		'UserList':'/users/',
-		'GetUser':'/getuser/<str:name>/',
-		'ADD':'/adduser/',
-		'Update':'/updateuser/<str:name>/',
-		'Delete':'/deleteuser/<str:name>/',
+		'UserList':'http://localhost:8000/users',
+		'Get User':'http://localhost:8000/getuser/<str:name>',
+		'ADD User':'http://localhost:8000/adduser',
+		'Update User':'http://localhost:8000/updateuser/<str:name>',
+		'Delete User':'http://localhost:8000/deleteuser/<str:name>',
         'login' : '/login/<str:name>&<str:password>',
-		'Matches':'----------------------------------------',
-        'Get_All_Teams':'/teams/',
-        'Get_All_Refs':'/refs/',
-        'Get_All_matches':'/matches/'
+        'Approved Users':'http://localhost:8000/appusers',
+        'Unapproved Users':'http://localhost:8000/unappusers',
+		'Stadiums':'----------------------------------------',
+        'Add New Stadium':'http://localhost:8000/addstadium',
+        'Get All Stadiums':'http://localhost:8000/stadiums',
+        'Matches':'----------------------------------------',
+        'Get All Matches':'http://localhost:8000/matches',
+        'Add Match':'http://localhost:8000/addmatch',
+        'Update Match':'http://localhost:8000/updatematch/<int:match_id>',
+        'Teams':'----------------------------------------',
+        'Get All Teams':'http://localhost:8000/teams',
+        'Refrees':'----------------------------------------',
+        'Get All Refrees':'http://localhost:8000/refs',
+        'Tickets':'----------------------------------------',
+        'Get Tickets of a user':'http://localhost:8000/tickets/<str:name>',
+        'Delete Ticket':'http://localhost:8000/deleteticket/<int:ticketid>',
+        'Add Ticket':'http://localhost:8000/addticket/<str:username>',
+        'Get seats of a match':'http://localhost:8000/seats/<int:match_id>'
         }
 
 	return Response(api_urls)
@@ -107,6 +121,7 @@ def login(request , name , password):
                 pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
                 
                 return Response({
+                    "id" : user.id,
                     "username" : user.username,
                     "role" : user.role
                 });
@@ -114,5 +129,17 @@ def login(request , name , password):
                 return Response(status=status.HTTP_401_UNAUTHORIZED);    
         else:
             return Response(status=status.HTTP_403_FORBIDDEN);
+
+@api_view(['GET'])
+def ApprovedUserList(request):
+    users = userview.objects.filter(Q(approved=True) , Q(role='F') | Q(role='M') )
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def UnapprovedUserList(request):
+    users = userview.objects.filter(Q(approved=False) , Q(role='F') | Q(role='M') )
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 
