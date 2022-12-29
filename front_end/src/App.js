@@ -9,6 +9,7 @@ import MatchesPage from "./pages/Matches"
 import Profile from "./pages/Profile"
 import NewMatch from "./pages/NewMatch"
 import YourTickets from "./pages/YourTickets"
+import Adminstrator from './pages/AdminPage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Login />} />
+        <Route path='/admin' element={<Adminstrator />} />
         <Route path='/Home' element={<AllMeetupsPage />} />
         <Route path='/new-stadium' element={<NewStaium />} />
         <Route path='/Matches' element={<MatchesPage />} />
