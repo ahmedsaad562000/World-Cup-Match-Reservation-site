@@ -53,6 +53,22 @@ class MatchesSerializer(serializers.ModelSerializer):
                 fields=['date', 'time' , 'stadium']
             )
         ]        
+class Matches_add_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Matches
+        fields=['date' ,'time' , 'stadium' ,'h_team','a_team' ,'stage','ref' ,'line1' ,'line2']
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Matches.objects.all(),
+                fields=['date', 'time' , 'stadium']
+            )
+        ]       
+
+class Matches_update_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Matches
+        fields=['date' ,'time' , 'stadium' ,'h_team','a_team' ,'stage','ref' ,'line1' ,'line2']   
+
 
         
 class Matches_Tickets_Serializer(serializers.ModelSerializer):
@@ -72,7 +88,7 @@ class Tickets_print_Serializer(serializers.ModelSerializer):
 class Tickets_add_Serializer(serializers.ModelSerializer):
         class Meta:
             model = Tickets
-            fields = ['match' , 'user' ,'row','seat']
+            fields = ['match' ,'row','seat']
 class seatsSerializer(serializers.ModelSerializer):
         class Meta:
             model = Tickets

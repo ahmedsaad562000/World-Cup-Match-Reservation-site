@@ -7,10 +7,11 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib import messages
-
+from datetime import datetime
+from datetime import timedelta
 # Create your views here.
-from .serializers import Stadiums_Names_Serializer, StadiumsSerializer, TeamsSerializer , RefreesSerializer , MatchesSerializer, Tickets_add_Serializer , Tickets_print_Serializer, seatsSerializer
-from matches.models import Stadiums, Teams as teamsview, Tickets
+from .serializers import Matches_add_Serializer, Matches_update_Serializer, Stadiums_Names_Serializer, StadiumsSerializer, TeamsSerializer , RefreesSerializer , MatchesSerializer, Tickets_add_Serializer , Tickets_print_Serializer, seatsSerializer
+from matches.models import Teams as teamsview
 from matches.models import Refrees as refview
 from matches.models import Matches as matchview
 from matches.models import Tickets as ticketsview
@@ -79,10 +80,10 @@ def deleteticket(request , ticket_id):
         tickets =  ticketsview.objects.get(id = ticket_id)
     except ticketsview.DoesNotExist: 
         return Response(status=status.HTTP_400_BAD_REQUEST)    
-    match = matchview.objects.get(id=tickets.id)
-    current_date = datetime.date.today()
+    match = matchview.objects.get(id=tickets.match.id)
+    current_date = datetime.now().date()
 
-    if ((match.date - current_date) > datetime.timedelta(days=3)):
+    if ((match.date - current_date) > timedelta(days=3)) or (current_date>match.date) :
         tickets.delete()
         return Response(status=status.HTTP_200_OK)
     else:
@@ -104,7 +105,7 @@ def AddStadium(request):
 
 @api_view(['POST'])
 def AddMatch(request):
-    serializer = MatchesSerializer(data=request.data)
+    serializer = Matches_add_Serializer(data=request.data)
     
     if serializer.is_valid():
             serializer.save();
@@ -114,43 +115,59 @@ def AddMatch(request):
         return Response(status=status.HTTP_400_BAD_REQUEST);
 
 @api_view(['POST'])
-def UpdateMactch(request , match_id):
+def UpdateMatch(request , match_id):
     try:
-        match = userview.objects.get(id=match_id)
+        match = matchview.objects.get(id=match_id)
     except matchview.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND);
-    serializer = MatchesSerializer(instance=match,data=request.data)
+
+    serializer = Matches_add_Serializer(instance=match,data=request.data)
+    
+    #serializer.initial_data['id']=match.id
+    #print(serializer.initial_data['id'])
     if serializer.is_valid():
         serializer.save()
-        return Response(status=status.HTTP_200_OK);
+        return Response(status=status.HTTP_200_OK)
     else:
-        return Response(status=status.HTTP_400_BAD_REQUEST);
+        #print(serializer.data['id'])
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def AddTicket(request , username):
-    match_id = request.POST['match_id']
-    row = request.POST['row']
-    seat = request.POST['seat']
-    #serializer = Tickets_add_Serializer(data=request.data)
-    #if serializer.is_valid():
-    current_match = matchview.objects.get(id = match_id)
-    userobj = userview.objects.get(username=username)
 
-    clashing_matches = matchview.objects.filter(Q(date = current_match.date) | Q(time = current_match.time) )
-        
-    if clashing_matches.count()==1:
-        ticket = ticketsview(user=userobj.id, match = match_id,row=row , seat=seat);
-        ticket.save()
-        return Response(status=status.HTTP_200_OK);
-    else:
-        for i in clashing_matches:
-            clash = ticketsview.objects.filter(user = userobj.id , match = i.id)
-            if clash:
+    serializer = Tickets_add_Serializer(data=request.data)
+    if serializer.is_valid():
+        match_id = serializer.data['match']
+        row = serializer.data['row']
+        seat = serializer.data['seat']
+        current_match = matchview.objects.get(id = match_id)
+        userobj = userview.objects.get(username=username)
+
+        clashing_matches = matchview.objects.filter(date = current_match.date ,time = current_match.time)
+        print("\n")
+        print(clashing_matches.count())
+        print("\n")
+        if clashing_matches.count()==1:
+            print("\nim in\n");
+            
+            check_ticket=ticketsview.objects.filter(user=userobj,row=row,seat=seat,match=current_match)
+            if not check_ticket:
+                ticket = ticketsview(user=userobj, match = current_match,row=row , seat=seat);
+                ticket.save()
+                return Response(status=status.HTTP_200_OK);
+            else:
                 return Response(status=status.HTTP_403_FORBIDDEN);
         else:
-            ticket = ticketsview(user=userobj.id, match = match_id,row=row , seat=seat);
-            ticket.save()
-            return Response(status=status.HTTP_200_OK);
+            for i in clashing_matches:
+                clash = ticketsview.objects.filter(user = userobj , match = i)
+                if clash:
+                    return Response(status=status.HTTP_401_UNAUTHORIZED);
+            else:
+                ticket = ticketsview(user=userobj, match = current_match,row=row , seat=seat);
+                ticket.save()
+                return Response(status=status.HTTP_200_OK);
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST);
 
 
         
