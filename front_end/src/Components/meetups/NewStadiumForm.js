@@ -20,10 +20,10 @@ function NewStadiumForm(props) {
     const enteredDescription = descriptionInputRef.current.value;
 
     const meetupData = {
-      Sname: enteredName,
-      title: enteredTitle,
-      image: enteredImage,
-      address: enteredAddress,
+      name: enteredName,
+      rows: enteredTitle,
+      seats_per_row: enteredImage,
+      link: enteredAddress,
       description: enteredDescription,
     };
 
@@ -34,20 +34,20 @@ function NewStadiumForm(props) {
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
-          <label htmlFor='Sname'><span className={classes.vip}>Stadium</span> Name</label>
-          <input type='text' required id='Sname' ref={nameInputRef} />
+          <label htmlFor='name'><span className={classes.vip}>Stadium</span> Name</label>
+          <input type='text' required id='name' ref={nameInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='title'><span className={classes.vip}>VIP</span> Lounge Rows</label>
-          <input type='text' required id='title' ref={titleInputRef} />
+          <label htmlFor='rows'><span className={classes.vip}>VIP</span> Lounge Rows</label>
+          <input type='text' required id='rows' ref={titleInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='address'>Row Number Of Seats</label>
-          <input type='text' required id='address' ref={addressInputRef} />
+          <label htmlFor='seats_per_row'>Row Number Of Seats</label>
+          <input type='text' required id='seats_per_row' ref={addressInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='image'>Stadium Image</label>
-          <input type='url' required id='image' ref={imageInputRef} />
+          <label htmlFor='link'>Stadium Image</label>
+          <input type='url' required id='link' ref={imageInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor='description'>Description</label>

@@ -16,7 +16,7 @@ class Teams(models.Model):
 
 
 class Refrees(models.Model):
-    name = models.CharField(max_length=255 , unique=True , primary_key=True , default = "sub_refree");
+    name = models.CharField(max_length=255 , unique=True , primary_key=True );
     def __str__(self):
         return self.name
 
@@ -37,11 +37,11 @@ class Matches(models.Model):
     date = models.DateField();
     time = models.TimeField();
     stage = models.CharField(max_length=30 , null=True);
-    ref = models.ForeignKey(Refrees,related_name='ref' ,on_delete=models.SET_DEFAULT , default = "sub_refree");
-    line1 = models.ForeignKey(Refrees,related_name='line1', on_delete=models.SET_DEFAULT , default = "sub_refree1");
-    line2 = models.ForeignKey(Refrees, on_delete=models.SET_DEFAULT, default = "sub_refree2");
+    refree = models.ForeignKey(Refrees,related_name='refree' ,on_delete=models.SET_NULL,null=True);
+    line1 = models.ForeignKey(Refrees,related_name='line1', on_delete=models.SET_NULL,null=True);
+    line2 = models.ForeignKey(Refrees, on_delete=models.SET_NULL,null=True);
     class Meta:
-        unique_together = ('h_team', 'a_team','stadium','date','time', 'stage','ref','line1','line2');
+        unique_together = ('h_team', 'a_team','stadium','date','time', 'stage','refree','line1','line2');
 
 class Tickets(models.Model):
     match = models.ForeignKey(Matches , on_delete=models.CASCADE);

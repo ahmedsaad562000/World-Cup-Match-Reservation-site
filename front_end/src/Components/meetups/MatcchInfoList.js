@@ -8,11 +8,14 @@ function MatchInfoList(props) {
         <MatchInfoItem
           key={meetup.id}
           id={meetup.id}  // Match ID Est5dmha zy ma heya
-          username={meetup.username}
-          first_name={meetup.first_name}
-          last_name={meetup.last_name}
-          email={meetup.email}
-          role={meetup.role}
+          H_team={meetup.H_team}
+          A_team={meetup.A_team}
+          stadium={meetup.stadium}
+          date={meetup.date}
+          time={meetup.time}
+          refree={meetup.refree}
+          line1={meetup.line1}
+          line2={meetup.line2}
         />
       ))}
     </ul>

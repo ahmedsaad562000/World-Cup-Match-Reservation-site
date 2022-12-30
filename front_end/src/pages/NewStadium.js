@@ -9,7 +9,7 @@ function NewStaium() {
 
   function addStadupHandler(meetupData) {
     fetch(
-      'https://test-database-c863c-default-rtdb.firebaseio.com/meetups.json',
+      'http://localhost:8000/api/addstadium',
       {
         method: 'POST',
         body: JSON.stringify(meetupData),
@@ -17,8 +17,15 @@ function NewStaium() {
           'Content-Type': 'application/json',
         },
       }
-    ).then(() => {
-      history('/Home');
+    ).then((res) => {
+      if (res.status === 500 || res.status === 404) {
+        alert("error");
+      }
+      else {
+        history('/Home');
+      }
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
