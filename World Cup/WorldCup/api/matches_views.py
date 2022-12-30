@@ -150,7 +150,7 @@ def AddTicket(request , username):
         if clashing_matches.count()==1:
             print("\nim in\n");
             
-            check_ticket=ticketsview.objects.filter(user=userobj,row=row,seat=seat,match=current_match)
+            check_ticket=ticketsview.objects.filter(row=row,seat=seat,match=current_match)
             if not check_ticket:
                 ticket = ticketsview(user=userobj, match = current_match,row=row , seat=seat);
                 ticket.save()
