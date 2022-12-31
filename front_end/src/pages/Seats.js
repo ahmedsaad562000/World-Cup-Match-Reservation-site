@@ -1,7 +1,5 @@
-
 import { useState, useEffect } from 'react';
 import Reservation from '../Components/meetups/CinemaMode';
-
 function Seats()
 {
 
@@ -40,10 +38,19 @@ function Seats()
     //       </section>
     //   );
     // }
-    return(
-        <section>
-            <Reservation meetups={loadedMeetups} />
-        </section>
+    return (
+      <section
+        style={{
+          backgroundImage:
+            "url('https://d3hnfqimznafg0.cloudfront.net/images/Article_Images/ImageForArticle_365(1).jpg')",
+          height: "100vh",
+          overflow: "hidden",
+          backgroundRepeat: "no-repeat",
+  backgroundSize: "cover"
+        }}
+      >
+        <Reservation no={2} />
+      </section>
     );
 }
 

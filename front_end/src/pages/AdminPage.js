@@ -1,11 +1,10 @@
 // import { useNavigate } from 'react-router-dom';
-import AdminContent from "../Components/meetups/adminContent";
+import AdminContent from "../Components/meetups/AdminContent";
 
 function Adminstrator(props)
 {
     return(
         <section>
-            <h1 style={{color: '#6a6f8c'}}>Admin Page</h1>
             <AdminContent />
         </section>
     );
