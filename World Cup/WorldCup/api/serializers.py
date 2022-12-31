@@ -22,7 +22,12 @@ class login_User_Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields=['username','role']
-
+        
+class login_User_check_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields=['username','password']
+ 
 
 
 class NO_Verify_UserSerializer(serializers.ModelSerializer):

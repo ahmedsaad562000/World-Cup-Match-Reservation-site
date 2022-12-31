@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib import messages
 # Create your views here.
-from .serializers import Add_User_Serializer, UserSerializer , NO_Verify_UserSerializer, login_User_Serializer
+from .serializers import Add_User_Serializer, UserSerializer , NO_Verify_UserSerializer, login_User_Serializer, login_User_check_Serializer
 from accounts.models import User as userview
 from django.db.models import Q
 
@@ -121,9 +121,12 @@ def DeleteUser(request , name):
 
 
 
-@api_view(['GET'])
-def login(request , name , password):
+@api_view(['POST'])
+def login(request):
     
+        serializer = login_User_check_Serializer(data=request.data)
+        name = serializer.data['username']
+        password = serializer.data['password']
         try:
             user = userview.objects.get(username=name , password=password);
         except userview.DoesNotExist:
