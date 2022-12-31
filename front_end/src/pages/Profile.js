@@ -9,7 +9,7 @@ function Profile() {
 
     function editUser(meetupData) {
       fetch(
-        'http://localhost:8000/api/adduser',
+        'http://localhost:8000/api/updateuser',
         {
           method: 'POST',
           body: JSON.stringify(meetupData),
@@ -18,8 +18,9 @@ function Profile() {
           },
         }
       ).then((res) => {
-        if (res.status === 500 || res.status === 404) {
-          console.log("error");
+        console.log(meetupData);
+        if (res.status !== 200) {
+          alert("Error: " + res.status );
         }
         else {
           history('/Home');

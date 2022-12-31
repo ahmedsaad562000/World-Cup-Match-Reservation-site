@@ -18,6 +18,7 @@ function NewMatch() {
         },
       }
     ).then((res) => {
+      console.log(meetupData);
       if (res.status !== 200) {
         alert("Error: " + res.status );
       }

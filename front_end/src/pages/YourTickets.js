@@ -14,7 +14,7 @@ function YourTickets() {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      'http://localhost:8000/api/users'
+      'http://localhost:8000/api/tickets'
     )
       .then((response) => {
         return response.json();
