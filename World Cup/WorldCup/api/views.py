@@ -124,22 +124,24 @@ def DeleteUser(request , name):
 @api_view(['GET' , 'POST'])
 def login(request , name , password):
     
-        user = authenticate(username=name , password=password)
-        if user is not None:
-            if user.role=='A' or user.approved==True:
-               # login(request, user);
-                pp = pprint.PrettyPrinter(indent=4)
-                pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
-                
-                return Response({
-                    "id" : user.id,
-                    "username" : user.username,
-                    "role" : user.role
-                });
-            elif user.approves==False:
-                return Response(status=status.HTTP_401_UNAUTHORIZED);    
-        else:
-            return Response(status=status.HTTP_403_FORBIDDEN);
+        try:
+            user = userview.objects.get(username=name , password=password);
+        except userview.DoesNotExist:
+            return Response(status=status.HTTP_404_FORBIDDEN);
+
+        if user.role=='A' or user.approved==True or user.role=='F':
+            # login(request, user);
+            pp = pprint.PrettyPrinter(indent=4)
+            pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
+            
+            return Response({
+                "id" : user.id,
+                "username" : user.username,
+                "role" : user.role
+            });
+        elif user.approves==False:
+            return Response(status=status.HTTP_401_UNAUTHORIZED);    
+
 
 @api_view(['GET'])
 def ApprovedUserList(request):
