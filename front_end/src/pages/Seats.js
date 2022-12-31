@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Reservation from '../Components/meetups/CinemaMode';
-function Seats()
+function Seats(props)
 {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedMeetups, setLoadedMeetups] = useState([]);
-  
+    const {state} = useLocation();
+    const { matchID, color } = state; // Read values passed on state
+    // console.log(`Match id seats: ${matchID}`);
+
     useEffect(() => {
       setIsLoading(true);
       fetch(
-        'http://localhost:8000/api/seats/'
+        `http://localhost:8000/api/seats/${matchID}`
       )
         .then((response) => {
           return response.json();
@@ -46,10 +50,10 @@ function Seats()
           height: "100vh",
           overflow: "hidden",
           backgroundRepeat: "no-repeat",
-  backgroundSize: "cover"
+          backgroundSize: "cover"
         }}
       >
-        <Reservation no={2} />
+        <Reservation no={2} meetups={loadedMeetups} />
       </section>
     );
 }

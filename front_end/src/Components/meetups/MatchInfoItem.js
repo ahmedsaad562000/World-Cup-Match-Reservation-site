@@ -13,7 +13,7 @@ function MatchInfoItem(props) {
 
     const BoughtTickets = useContext(TicketsContext);
 
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const [modalIsOpen, SetModalIsOpen] = useState(false);
     const [EditIsOpen, SetEditIsOpen] = useState(false);
@@ -28,7 +28,10 @@ function MatchInfoItem(props) {
 
     function toogleTcketsStateHandler() {
         // buyHandler();
-        history('/Seats');
+
+        // navigate('/Seats', { matchID: props.id });
+        navigate('/Seats', { state: { matchID: props.id, color: 'green'} });
+
     }
 
         //buy only if confirm purchase
@@ -48,7 +51,6 @@ function MatchInfoItem(props) {
                 line2: props.line2,
                 //Reserved seats 
             })
-
 
         /*
         * Add to server
@@ -79,11 +81,11 @@ function MatchInfoItem(props) {
 
 
     function WhatUser() {
-        if (!Manager) {
+        if (Manager) {
             return (
                 <div className={classes.actions}>
                     <button className="btn" onClick={editmatch}>Edit Info</button>
-                    <button className="btn--alt" onClick={buyHandler}>Seats Status</button>
+                    <button className="btn--alt" onClick={toogleTcketsStateHandler}>Seats Status</button>
 
                     {EditIsOpen && <EditMatch onConfirm={closeeditMatch} matchID={props.id} />}
                     {EditIsOpen && <Backdrop oncCancel={closeeditMatch} />}
@@ -93,7 +95,7 @@ function MatchInfoItem(props) {
         } else if (!Fan) {
             return (
                 <div className={classes.actions}>
-                    <button className="btn" onClick={toogleTcketsStateHandler}>Buy Now</button>
+                    <button className="btn" onClick={toogleTcketsStateHandler} >Buy Now</button>
                     {modalIsOpen && <Modal onCancel={closeModalHandler} onConfirm={ConfirmBuy} />}
                     {modalIsOpen && <Backdrop oncCancel={closeModalHandler} />}
                 </div>
@@ -102,7 +104,10 @@ function MatchInfoItem(props) {
 
         else {
             return (
-                <div className={classes.actions}></div>);
+                <div className={classes.actions}>
+                    <button className="btn--alt" onClick={toogleTcketsStateHandler}>Seats Status</button>
+                </div>
+                );
         }
     }
 
