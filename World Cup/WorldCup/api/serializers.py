@@ -13,6 +13,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields=['id','username','first_name','last_name','email','role','nationality']
 
+class Add_User_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields=['username','first_name','last_name','email','role','nationality']
+class NO_Verify_UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields=['first_name','last_name','email','role','nationality']
+
 class StadiumsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stadiums
