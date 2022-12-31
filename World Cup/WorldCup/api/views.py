@@ -3,6 +3,7 @@ from django.shortcuts import render
 import pprint
 
 from django.contrib.auth import authenticate
+from django.urls import is_valid_path
 
 from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import api_view
@@ -27,7 +28,7 @@ def apiOverview(request):
 		'ADD User':'http://localhost:8000/api/adduser/',
 		'Update User':'http://localhost:8000/api/updateuser/<str:name>/',
 		'Delete User':'http://localhost:8000/api/deleteuser/<str:name>/',
-        'login' : 'http://localhost:8000/api/login/<str:name>&<str:password>',
+        'login' : 'http://localhost:8000/api/login/',
         'All Users List':'http://localhost:8000/api/users',
         'Approved Users List':'http://localhost:8000/api/appusers/',
         'Unapproved Users List':'http://localhost:8000/api/unappusers/',
@@ -124,9 +125,11 @@ def DeleteUser(request , name):
 @api_view(['POST'])
 def login(request):
     
-        serializer = login_User_check_Serializer(data=request.data)
-        name = serializer.data['username']
-        password = serializer.data['password']
+        pp = pprint.PrettyPrinter(indent=4)
+        name = request.data['username']
+        password = request.data['password']
+        pp.pprint("You are now logged in as "+name+ " with password: "+password)
+
         try:
             user = userview.objects.get(username=name , password=password);
         except userview.DoesNotExist:
@@ -134,7 +137,7 @@ def login(request):
 
         if user.role=='A' or user.approved==True or user.role=='F':
             # login(request, user);
-            pp = pprint.PrettyPrinter(indent=4)
+           
             pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
             
             serializer = login_User_Serializer(instance=user);
