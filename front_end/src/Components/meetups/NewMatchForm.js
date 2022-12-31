@@ -30,8 +30,8 @@ function NewMatchForm(props) {
         const LineManTwo = lineManTwoRef.current.value;
 
         const meetupData = {
-            H_team: HomeTeam,
-            A_team: AwayTeam,
+            h_team: HomeTeam,
+            a_team: AwayTeam,
             stadium: Stadium,
             date: MatchDate,
             time: MatchTime,

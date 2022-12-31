@@ -7,9 +7,9 @@ function EditMatch(props) {
 
     function editMatchupHandler(meetupData) {
       fetch(
-        'http://localhost:8000/api/addmatch',
+        `http://localhost:8000/api/updatematch/${props.matchID}`,
         {
-          method: 'PATCH',
+          method: 'POST',
           body: JSON.stringify(meetupData),
           headers: {
             'Content-Type': 'application/json',
@@ -22,20 +22,18 @@ function EditMatch(props) {
         }
         else {
           history('/Matches');
+          props.onConfirm();
+          window.location.reload(false);
         }
       }).catch((err) => {
         console.log(err);
       });
     }
 
-    function confirmHandler()
-    {
-        props.onConfirm();
-    }
     
     return (
         <div className="ShowMore">
-            <NewMatchForm onConfirm={confirmHandler} onAddMeetup={editMatchupHandler} text="Edit Match"/>
+            <NewMatchForm onAddMeetup={editMatchupHandler} text="Edit Match"/>
         </div>
     );
 }

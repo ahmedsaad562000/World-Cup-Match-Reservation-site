@@ -37,7 +37,6 @@ function App() {
         <Route path='/YourTickets' element={<YourTickets />} />
         <Route path='/Seats' element={<Seats />} />
       </Routes>
-    
   );
 
 }

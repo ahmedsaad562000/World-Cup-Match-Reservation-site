@@ -4,7 +4,7 @@ import AdminContent from "../Components/meetups/AdminContent";
 function Adminstrator(props)
 {
     return(
-        <section>
+        <section style={{marginTop:"80px"}}>
             <AdminContent />
         </section>
     );

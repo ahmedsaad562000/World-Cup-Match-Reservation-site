@@ -21,7 +21,6 @@ function MatchInfoItem(props) {
     const [Manager, Setmanager] = useState(false);
     const [Fan, SetFan] = useState(false);
 
-    console.log(`"${props.H_team.link}"`);
 
     function buyHandler() {
         SetModalIsOpen(true);
@@ -29,9 +28,7 @@ function MatchInfoItem(props) {
 
     function toogleTcketsStateHandler() {
         // buyHandler();
-
         history('/Seats');
-
     }
 
         //buy only if confirm purchase
@@ -41,8 +38,8 @@ function MatchInfoItem(props) {
             BoughtTickets.addTicket({
                 //data to be added for tickets list
                 id: props.id,
-                H_team: props.H_team,
-                A_team: props.A_team,
+                h_team: props.H_team,
+                a_team: props.A_team,
                 stadium: props.stadium,
                 date: props.date,
                 time: props.time,
@@ -54,7 +51,7 @@ function MatchInfoItem(props) {
 
 
         /*
-        * Add tp server
+        * Add to server
         */
        
         }
@@ -82,13 +79,13 @@ function MatchInfoItem(props) {
 
 
     function WhatUser() {
-        if (Manager) {
+        if (!Manager) {
             return (
                 <div className={classes.actions}>
                     <button className="btn" onClick={editmatch}>Edit Info</button>
                     <button className="btn--alt" onClick={buyHandler}>Seats Status</button>
 
-                    {EditIsOpen && <EditMatch onConfirm={closeeditMatch} />}
+                    {EditIsOpen && <EditMatch onConfirm={closeeditMatch} matchID={props.id} />}
                     {EditIsOpen && <Backdrop oncCancel={closeeditMatch} />}
                 </div>
             );
