@@ -46,7 +46,7 @@ function Login(props) {
                 alert("Error: No User with this data");
             }
             else {
-                console.log(`response is: ${res} ${res.status}`);
+                console.log(`response is: ${res.json()} ${res.status}`);
                 navigateHandler('/Home');
             }
         }).catch((err) => {
@@ -88,7 +88,7 @@ function Login(props) {
         };
 
         var password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        if (password_pattern.test(PassWord))
+        if (!password_pattern.test(PassWord))
         {
             alert("Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number");
         }
