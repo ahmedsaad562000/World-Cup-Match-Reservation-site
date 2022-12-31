@@ -7,16 +7,24 @@ function EditMatch(props) {
 
     function editMatchupHandler(meetupData) {
       fetch(
-        'https://test-database-c863c-default-rtdb.firebaseio.com/meetups.json',
+        'http://localhost:8000/api/addmatch',
         {
-          method: 'POST',
+          method: 'PATCH',
           body: JSON.stringify(meetupData),
           headers: {
             'Content-Type': 'application/json',
           },
         }
-      ).then(() => {
-        history('/Matches');
+      ).then((res) => {
+        console.log(meetupData);
+        if (res.status !== 200) {
+          alert("Error: " + res.status );
+        }
+        else {
+          history('/Matches');
+        }
+      }).catch((err) => {
+        console.log(err);
       });
     }
 

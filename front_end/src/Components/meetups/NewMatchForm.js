@@ -7,7 +7,7 @@ import Card from "../ui/Card";
 import classes from './NewStadiumForm.module.css';
 
 function NewMatchForm(props) {
-
+    
     const homeTeamRef = useRef();
     const awayTeamRef = useRef();
     const stadiumRef = useRef();
@@ -17,8 +17,8 @@ function NewMatchForm(props) {
     const lineManOneRef = useRef();
     const lineManTwoRef = useRef();
 
-    function submitHandler(event) {
-        event.preventDefault();
+    function submitHandler() {
+        // event.preventDefault();
         
         const HomeTeam = homeTeamRef.current.value;
         const AwayTeam = awayTeamRef.current.value;
@@ -30,18 +30,36 @@ function NewMatchForm(props) {
         const LineManTwo = lineManTwoRef.current.value;
 
         const meetupData = {
-            Hteam: HomeTeam,
-            Ateam: AwayTeam,
-            Stad: Stadium,
-            Mdate: MatchDate,
-            Mtime: MatchTime,
-            MainRef: MainRefree,
-            LineManOne: LineManone,
-            LineManTwo: LineManTwo,
+            H_team: HomeTeam,
+            A_team: AwayTeam,
+            stadium: Stadium,
+            date: MatchDate,
+            time: MatchTime,
+            refree: MainRefree,
+            line1: LineManone,
+            line2: LineManTwo
         };
 
         props.onAddMeetup(meetupData);
-        props.onConfirm();
+        // props.onConfirm();
+    }
+
+    function Validate(event)
+    {
+        event.preventDefault();
+        if(homeTeamRef.current.value === awayTeamRef.current.value)
+        {
+            alert("Same Team Cant be selected more than once");
+            console.log("Same Team Cant be selected more than once");
+        }
+        else if(mainRefreeRef.current.value === lineManOneRef.current.value || lineManTwoRef.current.value === mainRefreeRef.current.value || lineManTwoRef.current.value === lineManOneRef.current.value )
+        {
+            alert("Same Refree Cant be selected more than once");
+            console.log("Same Refree Cant be selected more than once");
+        }
+        else{
+            submitHandler();
+        }
     }
 
     // function EditHandler(event) {
@@ -74,7 +92,7 @@ function NewMatchForm(props) {
     
     return (
         <Card>
-            <form className={classes.form} onSubmit={submitHandler}>
+            <form className={classes.form} onSubmit={Validate}>
                 <div className={classes.control}>
                     <label htmlFor='Hteam'><span className={classes.vip}>Home</span> Team</label>
                     <input type='text' required id='Hteam' ref={homeTeamRef} />
