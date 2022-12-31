@@ -5,26 +5,26 @@ import classes from './NewStadiumForm.module.css';
 
 function NewStadiumForm(props) {
   const nameInputRef = useRef();
-  const titleInputRef = useRef();
-  const imageInputRef = useRef();
-  const addressInputRef = useRef();
+  const rowInputRef = useRef();
+  const colInputRef = useRef();
+  const imgInputRef = useRef();
   const descriptionInputRef = useRef();
 
   function submitHandler(event) {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
-    const enteredTitle = titleInputRef.current.value;
-    const enteredImage = imageInputRef.current.value;
-    const enteredAddress = addressInputRef.current.value;
+    const enteredrow = rowInputRef.current.value;
+    const enteredcol = colInputRef.current.value;
+    const enteredImage = imgInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
 
     const meetupData = {
-      Sname: enteredName,
-      title: enteredTitle,
-      image: enteredImage,
-      address: enteredAddress,
-      description: enteredDescription,
+      name: enteredName,
+      rows: enteredrow,
+      seats_per_row: enteredcol,
+      link: enteredImage,
+      description: enteredDescription
     };
 
     props.onAddMeetup(meetupData);
@@ -34,20 +34,20 @@ function NewStadiumForm(props) {
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
-          <label htmlFor='Sname'><span className={classes.vip}>Stadium</span> Name</label>
-          <input type='text' required id='Sname' ref={nameInputRef} />
+          <label htmlFor='name'><span className={classes.vip}>Stadium</span> Name</label>
+          <input type='text' required id='name' ref={nameInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='title'><span className={classes.vip}>VIP</span> Lounge Rows</label>
-          <input type='text' required id='title' ref={titleInputRef} />
+          <label htmlFor='rows'><span className={classes.vip}>VIP</span> Lounge Rows</label>
+          <input type='text' required id='rows' ref={rowInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='address'>Row Number Of Seats</label>
-          <input type='text' required id='address' ref={addressInputRef} />
+          <label htmlFor='seats_per_row'>Row Number Of Seats</label>
+          <input type='text' required id='seats_per_row' ref={colInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='image'>Stadium Image</label>
-          <input type='url' required id='image' ref={imageInputRef} />
+          <label htmlFor='link'>Stadium Image</label>
+          <input type='url' required id='link' ref={imgInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor='description'>Description</label>

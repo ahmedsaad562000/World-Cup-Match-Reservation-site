@@ -4,6 +4,7 @@ import { useState } from 'react';
 import TicketsContext from '../../pages/store/UserTickets_Context';
 
 import classes from './MainNavigation.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function MainNavigation(props) {
 
@@ -26,7 +27,7 @@ function MainNavigation(props) {
     if (Manager) {
       return (
         <header className={classes.header}>
-          <div className={classes.logo}>Welcome To Qatar</div>
+          <div className={classes.logo}>Marhaba <FontAwesomeIcon icon="fa-regular fa-face-smile-wink" /></div>
           <nav>
             <ul>
               <li>
@@ -58,7 +59,7 @@ function MainNavigation(props) {
     else if (!Fan) {
       return (
         <header className={classes.header}>
-          <div className={classes.logo}>Welcome To Qatar</div>
+          <div className={classes.logo}>Marhaba <FontAwesomeIcon icon="fa-regular fa-face-smile-wink" /></div>
           <nav>
             <ul>
               <li>
@@ -92,7 +93,7 @@ function MainNavigation(props) {
     else {
       return (
         <header className={classes.header}>
-          <div className={classes.logo}>Welcome To Qatar</div>
+          <div className={classes.logo}>Marhaba <FontAwesomeIcon icon="fa-regular fa-face-smile-wink" /></div>
           <nav>
             <ul>
               <li>

@@ -46,7 +46,7 @@ class MatchesSerializer(serializers.ModelSerializer):
     A_team = TeamslinkSerializer(source='a_team', many=False)
     class Meta:
         model = Matches
-        fields=['id' , 'date' ,'time' , 'stadium' ,'H_team','A_team' ,'stage','ref' ,'line1' ,'line2']
+        fields=['id' , 'date' ,'time' , 'stadium' ,'H_team','A_team' ,'stage','refree' ,'line1' ,'line2']
         validators = [
             UniqueTogetherValidator(
                 queryset=Matches.objects.all(),
@@ -56,7 +56,7 @@ class MatchesSerializer(serializers.ModelSerializer):
 class Matches_add_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Matches
-        fields=['date' ,'time' , 'stadium' ,'h_team','a_team' ,'stage','ref' ,'line1' ,'line2']
+        fields=['date' ,'time' , 'stadium' ,'h_team','a_team' ,'stage','refree' ,'line1' ,'line2']
         validators = [
             UniqueTogetherValidator(
                 queryset=Matches.objects.all(),
@@ -67,7 +67,7 @@ class Matches_add_Serializer(serializers.ModelSerializer):
 class Matches_update_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Matches
-        fields=['date' ,'time' , 'stadium' ,'h_team','a_team' ,'stage','ref' ,'line1' ,'line2']   
+        fields=['date' ,'time' , 'stadium' ,'h_team','a_team' ,'stage','refree' ,'line1' ,'line2']   
 
 
         
