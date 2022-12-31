@@ -11,16 +11,16 @@ from django.db import models
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields=['id','password','username','first_name','last_name','email','gender','role','nationality']
+        fields=['id','username','password','first_name','last_name','birthdate','email','gender','role','nationality']
 
 class Add_User_Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields=['username','password','first_name','last_name','email','gender','role','nationality']
+        fields=['username','password','first_name','last_name','birthdate','email','gender','role','nationality']
 class NO_Verify_UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields=['password','first_name','last_name','gender','nationality']
+        fields=['password','first_name','last_name','birthdate','gender','nationality']
 
 class StadiumsSerializer(serializers.ModelSerializer):
     class Meta:
