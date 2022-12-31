@@ -42,7 +42,7 @@ class Matches(models.Model):
     line2 = models.ForeignKey(Refrees, on_delete=models.SET_NULL,null=True);
     class Meta:
         unique_together = ('h_team', 'a_team','stadium','date','time', 'stage','refree','line1','line2');
-
+        ordering = ['date', 'time']
 class Tickets(models.Model):
     match = models.ForeignKey(Matches , on_delete=models.CASCADE);
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE);
@@ -50,6 +50,7 @@ class Tickets(models.Model):
     seat = models.SmallIntegerField();
     class Meta:
         unique_together = ('match', 'user','row','seat');
+        ordering = ['match']
 
 
 
