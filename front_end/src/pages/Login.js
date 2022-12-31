@@ -144,11 +144,16 @@ function Login(props) {
 
         //validate on PASSWORD 
         var password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        var email_pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
         if (!password_pattern.test(PassWord)) {
             alert("Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number");
         }
         else if (REPassWord !== PassWord) {
             alert("Unamtched Passwords");
+        }
+        else if(!email_pattern.test(EMail))
+        {
+            alert("Invalid Email, valid email is in form of: Name@mail.com");
         }
         else {
             addUserHandler(meetupData);
