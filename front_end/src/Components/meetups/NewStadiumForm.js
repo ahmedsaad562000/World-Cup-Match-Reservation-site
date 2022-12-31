@@ -10,9 +10,7 @@ function NewStadiumForm(props) {
   const imgInputRef = useRef();
   const descriptionInputRef = useRef();
 
-  function submitHandler(event) {
-    event.preventDefault();
-
+  function submitHandler() {
     const enteredName = nameInputRef.current.value;
     const enteredrow = rowInputRef.current.value;
     const enteredcol = colInputRef.current.value;
@@ -30,9 +28,22 @@ function NewStadiumForm(props) {
     props.onAddMeetup(meetupData);
   }
 
+  function ValidateSeats(event)
+  {
+    event.preventDefault();
+
+    if(rowInputRef.current.value<=0 || rowInputRef.current.value>10 || colInputRef.current.value <=0 || colInputRef.current.value >10 )
+    {
+      alert("Rows And Seats must be in range 1-10");
+    }
+    else{
+      submitHandler();
+    }
+  }
+
   return (
     <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <form className={classes.form} onSubmit={ValidateSeats}>
       <div className={classes.control}>
           <label htmlFor='name'><span className={classes.vip}>Stadium</span> Name</label>
           <input type='text' required id='name' ref={nameInputRef} />

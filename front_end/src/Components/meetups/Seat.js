@@ -12,7 +12,7 @@ function Seat(probes)
     }
     let toggleclass=btnstate ? ' occupied':null
     return (
-<button disabled ={btnstate===true ? 'disabled' : ''} className={`seat ${toggleclass}`} onClick={btnhandler} value={`${probes.rown},${probes.coln}`} ></button>
+<button disabled ={(btnstate===true || probes.role !=='F') ? 'disabled' : ''} className={`seat ${toggleclass}`} onClick={btnhandler} value={`${probes.rown},${probes.coln}`} ></button>
 
     );
 }

@@ -52,7 +52,7 @@ function EditUser(props) {
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor='username'><span className={classes.vip}>User</span>Name</label>
-                    <input type='text' placeholder='username' required id='username' ref={usernameRef} />
+                    <input type='text' placeholder='username' required id='username' ref={usernameRef} disabled />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='pass'><span className={classes.vip}>Pass</span>word</label>
@@ -68,7 +68,7 @@ function EditUser(props) {
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='email'>Email</label>
-                    <input type='email' placeholder='Email' required id='email' ref={emailRef} />
+                    <input type='email' placeholder='Email' required id='email' ref={emailRef} disabled/>
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='birth'><span className={classes.vip}>Birth</span>date</label>
@@ -286,10 +286,9 @@ function EditUser(props) {
                 <div className="options_type" style={{marginTop: '-40px'}}>
                     <div className="type">
                         <label htmlFor="">Role</label>
-                        <select name="role" id="role" ref={roleRef}  style={{ backgroundColor: "#9c1458" }}>
-                            <option value="">Select one</option>
-                            <option value="manager">Manager</option>
-                            <option value="fan">Fan</option>
+                        <select name="role" id="role" ref={roleRef}  style={{ backgroundColor: "#9c1458" }} disabled>
+                            {/* role from local storage */}
+                            <option value="">{props.role}</option>
                         </select>
                     </div>
                 </div>

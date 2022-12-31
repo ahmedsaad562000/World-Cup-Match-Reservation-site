@@ -18,8 +18,7 @@ function NewMatchForm(props) {
     const lineManTwoRef = useRef();
 
     function submitHandler() {
-        // event.preventDefault();
-        
+        // event.preventDefault();        
         const HomeTeam = homeTeamRef.current.value;
         const AwayTeam = awayTeamRef.current.value;
         const Stadium = stadiumRef.current.value;

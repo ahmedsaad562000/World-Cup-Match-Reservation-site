@@ -10,6 +10,7 @@ body {
   background-image: url("../imgs/29724368_qatar_cup_12.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 
 *,
@@ -94,6 +95,7 @@ a {
 }
 
 .login-form {
+  height: 100%;
   min-height: 345px;
   position: relative;
   perspective: 1000px;
@@ -237,6 +239,7 @@ input[type="text"] {
 }
 input {
   outline: none;
+  height: 45px;
 }
 input[type="radio"] {
   accent-color: black;
@@ -244,4 +247,8 @@ input[type="radio"] {
 option {
   color: white;
   background-color: rgba(138, 21, 56, 0.9);
+  /* width: 30px !important; */
 }
+
+/* .sign-up-htm {
+} */
