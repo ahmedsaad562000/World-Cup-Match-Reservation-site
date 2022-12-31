@@ -133,7 +133,9 @@ def login(request , name , password):
             # login(request, user);
             pp = pprint.PrettyPrinter(indent=4)
             pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
+            
             serializer = login_User_Serializer(instance=user);
+            pp.pprint(serializer.data)
             return Response(serializer.data , status=status.HTTP_200_OK);
         elif user.approves==False:
             return Response(status=status.HTTP_401_UNAUTHORIZED);    
