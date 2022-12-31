@@ -27,6 +27,12 @@ class StadiumsSerializer(serializers.ModelSerializer):
         model = Stadiums
         fields=['name','rows','seats_per_row','link','description']
 
+class Matches_Stadium_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stadiums
+        fields=['name','rows','seats_per_row','link']
+
+
 class Stadiums_Names_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Stadiums
@@ -53,9 +59,10 @@ class RefreesSerializer(serializers.ModelSerializer):
 class MatchesSerializer(serializers.ModelSerializer):
     H_team = TeamslinkSerializer(source='h_team', many=False)
     A_team = TeamslinkSerializer(source='a_team', many=False)
+    Stadium = Matches_Stadium_Serializer(source='stadium', many=False)
     class Meta:
         model = Matches
-        fields=['id' , 'date' ,'time' , 'stadium' ,'H_team','A_team' ,'stage','refree' ,'line1' ,'line2']
+        fields=['id' , 'date' ,'time' , 'Stadium' ,'H_team','A_team' ,'stage','refree' ,'line1' ,'line2']
         validators = [
             UniqueTogetherValidator(
                 queryset=Matches.objects.all(),
