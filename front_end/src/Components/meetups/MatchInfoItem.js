@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../ui/Card'
 import classes from './MatchInfoItem.module.css';
 import TicketsContext from '../../pages/store/UserTickets_Context';
@@ -11,6 +12,8 @@ import EditMatch from './EditMatch';
 function MatchInfoItem(props) {
 
     const BoughtTickets = useContext(TicketsContext);
+
+    const history = useNavigate();
 
     const [modalIsOpen, SetModalIsOpen] = useState(false);
     const [EditIsOpen, SetEditIsOpen] = useState(false);
@@ -25,8 +28,9 @@ function MatchInfoItem(props) {
     }
 
     function toogleTcketsStateHandler() {
-        buyHandler();
+        // buyHandler();
 
+        history('/Seats');
 
     }
 

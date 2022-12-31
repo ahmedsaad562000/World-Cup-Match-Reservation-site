@@ -9,7 +9,7 @@ function NewMatch() {
 
   function addMatchupHandler(meetupData) {
     fetch(
-      'http://localhost:8000/api/adduser',
+      'http://localhost:8000/api/addmatch',
       {
         method: 'POST',
         body: JSON.stringify(meetupData),
@@ -18,8 +18,8 @@ function NewMatch() {
         },
       }
     ).then((res) => {
-      if (res.status === 500 || res.status === 404) {
-        console.log("error");
+      if (res.status !== 200) {
+        alert("Error: " + res.status );
       }
       else {
         history('/Matches');

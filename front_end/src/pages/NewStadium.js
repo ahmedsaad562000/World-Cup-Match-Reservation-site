@@ -18,8 +18,9 @@ function NewStaium() {
         },
       }
     ).then((res) => {
-      if (res.status === 500 || res.status === 404) {
-        alert("error");
+      console.log(meetupData);
+      if (res.status !== 200) {
+        alert("Error: " + res.status );
       }
       else {
         history('/Home');

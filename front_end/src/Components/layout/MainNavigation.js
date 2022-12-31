@@ -24,7 +24,7 @@ function MainNavigation(props) {
   }
 
   function WhatUser() {
-    if (!Manager) {
+    if (Manager) {
       return (
         <header className={classes.header}>
           <div className={classes.logo}>Marhaba <FontAwesomeIcon icon="fa-regular fa-face-smile-wink" /></div>

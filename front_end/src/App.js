@@ -10,6 +10,7 @@ import Profile from "./pages/Profile"
 import NewMatch from "./pages/NewMatch"
 import YourTickets from "./pages/YourTickets"
 import Adminstrator from './pages/AdminPage';
+import Seats from './pages/Seats';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/Profile' element={<Profile />} />
         <Route path='/NewMatch' element={<NewMatch />} />
         <Route path='/YourTickets' element={<YourTickets />} />
+        <Route path='/Seats' element={<Seats />} />
       </Routes>
     
   );
