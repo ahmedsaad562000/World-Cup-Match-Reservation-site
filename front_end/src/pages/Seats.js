@@ -9,7 +9,7 @@ function Seats()
     useEffect(() => {
       setIsLoading(true);
       fetch(
-        'http://localhost:8000/api/seats'
+        'http://localhost:8000/api/seats/'
       )
         .then((response) => {
           return response.json();

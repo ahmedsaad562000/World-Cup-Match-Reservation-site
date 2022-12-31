@@ -40,7 +40,7 @@ function AdminContent(props)
             
                 <div className="card-body">
                     <div className="divbtn">
-                         <Link to="/" className="btn btn-success">Log Out</Link> 
+                         <Link to="/" className="btn btn-success" style={{marginLeft:"1100px"}}>Log Out</Link> 
                     </div>
                     <table className="table table-bordered">
                         <thead className="bg-dark text-white">

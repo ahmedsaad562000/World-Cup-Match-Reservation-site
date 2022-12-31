@@ -9,7 +9,7 @@ function NewMatch() {
 
   function addMatchupHandler(meetupData) {
     fetch(
-      'http://localhost:8000/api/addmatch',
+      'http://localhost:8000/api/addmatch/',
       {
         method: 'POST',
         body: JSON.stringify(meetupData),

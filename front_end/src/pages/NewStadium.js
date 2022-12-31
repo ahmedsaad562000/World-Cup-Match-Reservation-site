@@ -9,7 +9,7 @@ function NewStaium() {
 
   function addStadupHandler(meetupData) {
     fetch(
-      'http://localhost:8000/api/addstadium',
+      'http://localhost:8000/api/addstadium/',
       {
         method: 'POST',
         body: JSON.stringify(meetupData),
