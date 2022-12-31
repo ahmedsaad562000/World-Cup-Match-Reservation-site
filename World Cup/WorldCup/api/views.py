@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib import messages
 # Create your views here.
-from .serializers import Add_User_Serializer, UserSerializer , NO_Verify_UserSerializer
+from .serializers import Add_User_Serializer, UserSerializer , NO_Verify_UserSerializer, login_User_Serializer
 from accounts.models import User as userview
 from django.db.models import Q
 
@@ -133,12 +133,8 @@ def login(request , name , password):
             # login(request, user);
             pp = pprint.PrettyPrinter(indent=4)
             pp.pprint("You are now logged in as "+user.username+ " with role: "+user.role)
-            
-            return Response({
-                "id" : user.id,
-                "username" : user.username,
-                "role" : user.role
-            });
+            serializer = login_User_Serializer(instance=user);
+            return Response(serializer.data , status=status.HTTP_200_OK);
         elif user.approves==False:
             return Response(status=status.HTTP_401_UNAUTHORIZED);    
 
