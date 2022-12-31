@@ -9,7 +9,8 @@ function Profile() {
 
     function editUser(meetupData) {
       fetch(
-        'http://localhost:8000/api/updateuser',
+        /*Get user name from local storage */
+        'http://localhost:8000/api/updateuser/',
         {
           method: 'POST',
           body: JSON.stringify(meetupData),

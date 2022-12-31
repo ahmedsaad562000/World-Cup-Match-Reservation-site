@@ -10,7 +10,7 @@ function MatchInfoList(props) {
           id={meetup.id}  // Match ID Est5dmha zy ma heya
           H_team={meetup.H_team}
           A_team={meetup.A_team}
-          stadium={meetup.stadium}
+          Stadium={meetup.Stadium}
           date={meetup.date}
           time={meetup.time}
           refree={meetup.refree}

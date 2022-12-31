@@ -30,8 +30,7 @@ function MatchInfoItem(props) {
         // buyHandler();
 
         // navigate('/Seats', { matchID: props.id });
-        navigate('/Seats', { state: { matchID: props.id, color: 'green'} });
-
+        navigate('/Seats', { state: { matchID: props.id, rows: props.Stadium.rows, seats_per_row: props.Stadium.seats_per_row} });
     }
 
         //buy only if confirm purchase
@@ -41,14 +40,14 @@ function MatchInfoItem(props) {
             BoughtTickets.addTicket({
                 //data to be added for tickets list
                 id: props.id,
-                h_team: props.H_team,
-                a_team: props.A_team,
-                stadium: props.stadium,
-                date: props.date,
-                time: props.time,
-                refree: props.refree,
-                line1: props.line1,
-                line2: props.line2,
+                // h_team: props.H_team,
+                // a_team: props.A_team,
+                // stadium: props.stadium,
+                // date: props.date,
+                // time: props.time,
+                // refree: props.refree,
+                // line1: props.line1,
+                // line2: props.line2,
                 //Reserved seats 
             })
 
@@ -81,7 +80,7 @@ function MatchInfoItem(props) {
 
 
     function WhatUser() {
-        if (Manager) {
+        if (!Manager) {
             return (
                 <div className={classes.actions}>
                     <button className="btn" onClick={editmatch}>Edit Info</button>
@@ -124,7 +123,7 @@ function MatchInfoItem(props) {
                     <h2>{props.A_team.name}</h2>
                 </div>
                 <div className={classes.content}>
-                    <h4>{props.stadium}</h4>
+                    <h4>{props.Stadium.name}</h4>
                     <address>{props.date}</address>
                     <address className={classes.Time}>{props.time}</address>
                     <div className={classes.LinesMan}>

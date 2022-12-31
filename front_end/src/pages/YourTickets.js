@@ -14,7 +14,8 @@ function YourTickets() {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      'http://localhost:8000/api/tickets'
+      /*Get user name from local storage */
+      'http://localhost:8000/api/tickets/'
     )
       .then((response) => {
         return response.json();

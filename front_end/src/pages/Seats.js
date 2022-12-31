@@ -7,8 +7,8 @@ function Seats(props)
     const [isLoading, setIsLoading] = useState(true);
     const [loadedMeetups, setLoadedMeetups] = useState([]);
     const {state} = useLocation();
-    const { matchID, color } = state; // Read values passed on state
-    // console.log(`Match id seats: ${matchID}`);
+    const { matchID, rows, seats_per_row } = state; // Read values passed on state
+    console.log(`Match id seats: ${matchID} ${rows} ${seats_per_row}`);
 
     useEffect(() => {
       setIsLoading(true);
