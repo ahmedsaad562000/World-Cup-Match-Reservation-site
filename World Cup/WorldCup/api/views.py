@@ -121,7 +121,7 @@ def DeleteUser(request , name):
 
 
 
-@api_view(['GET' , 'POST'])
+@api_view(['GET'])
 def login(request , name , password):
     
         try:
