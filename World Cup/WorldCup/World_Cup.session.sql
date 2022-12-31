@@ -1,5 +1,7 @@
-INSERT INTO matches_teams (name, link)
-VALUES ('Saudi Arabia', 'https://drive.google.com/file/d/1Wvu2W8BIZCO6nChxML8OnQSAwniopJYd/view?usp=share_link');
+UPDATE matches_teams
+SET link = 'https://i.ibb.co/yd7S1bP/Screenshot-2022-12-30-191544.png'
+WHERE name = 'Argentina';
 
-INSERT INTO matches_teams (name, link)
-VALUES ('Argentina', 'https://drive.google.com/file/d/1XZaGNize7PahinUidn0M9rJ52Bv7Y0Mi/view?usp=share_link');
+UPDATE matches_teams
+SET link = 'https://i.ibb.co/dKQhgMM/Screenshot-2022-12-30-192805.png'
+WHERE name = 'Saudi Arabia';

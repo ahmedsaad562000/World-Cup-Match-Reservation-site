@@ -7,7 +7,7 @@ INSERT INTO matches_matches (
 
     line2_id,
 
-    ref_id,
+    refree_id,
 
     stadium_id
 
