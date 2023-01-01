@@ -19,10 +19,6 @@ function MatchInfoItem(props) {
     const [EditIsOpen, SetEditIsOpen] = useState(false);
 
 
-    function buyHandler() {
-        SetModalIsOpen(true);
-    }
-
     function toogleTcketsStateHandler() {
         // buyHandler();
 

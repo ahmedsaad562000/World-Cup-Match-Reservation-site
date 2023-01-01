@@ -7,73 +7,41 @@ import Vedio from "../../imgs/videoplayback.webm";
 function Reservation(props) {
 
   const navigate = useNavigate();
+  var LoggedIn = localStorage.getItem('LoggedIn');
+  LoggedIn = JSON.parse(LoggedIn);
 
-  global.arrreserved = [
-    {
-      row: 0,
-      col: 0,
-      state: false,
-      id: -1
-    },
-    {
-      row: 0,
-      col: 1,
-      state: false,
-      id: -1
-    },
-    {
-      row: 0,
-      col: 2,
-      state: false,
-      id: -1
-    },
-    {
-      row: 0,
-      col: 3,
-      state: false,
-      id: -1
-    },
-    {
-      row: 0,
-      col: 4,
-      state: false,
-      id: -1
-    },
-    {
-      row: 1,
-      col: 0,
-      state: false,
-      id: -1
-    },
-    {
-      row: 1,
-      col: 1,
-      state: false,
-      id: -1
-    },
-    {
-      row: 1,
-      col: 2,
-      state: false,
-      id: -1
-    },
-    {
-      row: 1,
-      col: 3,
-      state: false,
-      id: -1
-    },
-    {
-      row: 1,
-      col: 4,
-      state: true,
-      id: -1
-    }
-  ]
+
+  global.arrreserved = props.matchData;
+
+  function Fetching(DataToFetch) {
+    fetch(
+      `http://localhost:8000/api/addticket/${LoggedIn[0]["username"]}/`,
+      {
+        method: 'POST',
+        body: JSON.stringify(DataToFetch),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    ).then((res) => {
+      console.log(DataToFetch);
+      if (res.status === 200) {
+        navigate('/Matches');
+      }
+      else {
+        console.log(res.state);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
   function Purchasehandler() {
     for (let i = 0; i < global.arrreserved.length; i++) {
-      console.log(global.arrreserved[i].state);
+      if (global.arrreserved[i].seat_status === true) {
+        console.log(global.arrreserved[i]);
+        Fetching(global.arrreserved[i]);
+      }
     }
   }
 
@@ -91,7 +59,8 @@ function Reservation(props) {
   let content;
 
   if (props.role === 'F') {
-    content = <button className="btnCheck" onClick={Purchasehandler} >Purchase</button>
+    content = <div style={{marginTop:'-3%'}}><button className="btnCheck" onClick={GoBackHandler}  style={{marginBottom:'1%'}}>Go Back</button>
+                <button className="btnCheck" onClick={Purchasehandler} >Purchase</button> </div>
   }
   else {
     content = <button className="btnCheck" onClick={GoBackHandler} >Go Back</button>
@@ -112,7 +81,7 @@ function Reservation(props) {
       ></iframe>
       <div className="chairs">
         {arr.map((user) => (
-          <Container no={5} row={user} role={props.role}>
+          <Container no={props.seatsPerRow} row={user} role={props.role}>
             {" "}
           </Container>
         ))}

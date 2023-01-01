@@ -31,7 +31,7 @@ function MeetupItem(props) {
         </div>
         <div className={classes.actions}>
           <button onClick={ShowingMore}>Show More</button>
-          {ShowmoreIsopen && <ShowMore text= {props.des} onCancel={closeModalHandler}  />}
+          {ShowmoreIsopen && <ShowMore text= {props.des} onCancel={closeModalHandler} />}
           {ShowmoreIsopen && <Backdrop oncCancel={closeModalHandler} />}
         </div>
       </Card>

@@ -1,27 +1,29 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Reservation from '../Components/meetups/CinemaMode';
 function Seats() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
 
+  const { state } = useLocation();
+  const { matchID, rows, seats_per_row } = state; // Read values passed on state
+
   var LoggedIn = localStorage.getItem('LoggedIn');
   LoggedIn = JSON.parse(LoggedIn);
   var TheRole;
 
-  if(LoggedIn)
-  {
-    TheRole=LoggedIn[0]["role"] ;
+  if (LoggedIn) {
+    TheRole = LoggedIn[0]["role"];
   }
-  else{
-    TheRole='G';
+  else {
+    TheRole = 'G';
   }
-  
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      'http://localhost:8000/api/seats'
+      `http://localhost:8000/api/seats/${matchID}`
     )
       .then((response) => {
         return response.json();
@@ -43,13 +45,13 @@ function Seats() {
       });
   }, []);
 
-  // if (isLoading) {
-  //   return (
-  //       <section>
-  //         <p>Loading...</p>
-  //       </section>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
   return (
     <section
       style={{
@@ -61,7 +63,7 @@ function Seats() {
         backgroundSize: "cover"
       }}
     >
-      <Reservation no={2} role={TheRole} />
+      <Reservation no={rows} seatsPerRow={seats_per_row} role={TheRole} matchData={loadedMeetups} />
     </section>
   );
 }

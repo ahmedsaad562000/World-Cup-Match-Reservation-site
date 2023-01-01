@@ -40,7 +40,7 @@ function BouhgtTickets(props) {
             /*Get user name from local storage */
             `http://localhost:8000/api/deleteticket/${props.id}/`,
             {
-                method: 'DELETE',
+                method: 'GET',
                 body: JSON.stringify(meetupData),
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,6 +1,0 @@
-global.arrreserved="ahmed";
-
-
-
-
-
