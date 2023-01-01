@@ -131,4 +131,4 @@ class seatsSerializer(serializers.ModelSerializer):
 
 
 
-            
+        

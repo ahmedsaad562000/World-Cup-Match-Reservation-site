@@ -1,3 +1,4 @@
+from distutils.command.check import check
 from django.shortcuts import render
 import pprint
 from django.utils.dateparse import parse_date , parse_time
@@ -47,7 +48,7 @@ def matchesList(request):
 def ticketsList(request , name):
     #try:
         user = userview.objects.get(username = name)
-        tickets =  ticketsview.objects.filter(user = user.id , status=True)
+        tickets =  ticketsview.objects.filter(user = user.id , seat_status=True)
         serializer = Tickets_print_Serializer(tickets, many=True)
         return Response(serializer.data)
     #except ticketsview.DoesNotExist: #No Tickets for current user
@@ -74,7 +75,7 @@ def stadiumsList(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def deleteticket(request , ticket_id):
     try:
         tickets =  ticketsview.objects.get(id = ticket_id)
@@ -85,7 +86,8 @@ def deleteticket(request , ticket_id):
 
     if ((match.date - current_date) > timedelta(days=3)) or (current_date>match.date) :
         #tickets.delete()
-        tickets.status=False;
+        tickets.seat_status=False;
+        tickets.save();
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)  
@@ -165,22 +167,30 @@ def UpdateMatch(request , match_id):
 def AddTicket(request , username):
 
     serializer = seatsSerializer(data=request.data)
+    ticket_id = serializer.initial_data['id'];
     if serializer.is_valid():
-
+        
         seat_status = serializer.validated_data.get('seat_status');
-
+        
         if seat_status == True:
-            match_id = serializer.validated_data.get('match')
+
+            print(ticket_id)
+            print(seat_status)
+            ticketobj = ticketsview.objects.get(id=ticket_id)
+            current_match = ticketobj.match
+            start = datetime(2000, 1, 1,hour=current_match.time.hour, minute=current_match.time.minute, second=current_match.time.second)
+            time_upper_bound = (start+timedelta(hours=3)).time();
+            time_lower_bound = (start-timedelta(hours=3)).time();
             row = serializer.validated_data.get('row')
             seat = serializer.validated_data.get('seat')
-            current_match = matchview.objects.get(id = match_id)
             userobj = userview.objects.get(username=username)
 
             check_ticket=ticketsview.objects.filter(row=row,seat=seat,match=current_match,seat_status=True)
             if(check_ticket.count()==1):
+                print("ana hna")
                 return Response(status=status.HTTP_200_OK);
             
-            clashing_matches = matchview.objects.filter(date = current_match.date ,time__gt=current_match.time-timedelta(hours=3) , time__lt=current_match.time+timedelta(hours=3))
+            clashing_matches = matchview.objects.filter(date = current_match.date ,time__gt=time_lower_bound , time__lt=time_upper_bound)
             print("\n")
             print(clashing_matches.count())
             print("\n")
@@ -188,9 +198,12 @@ def AddTicket(request , username):
                 print("\nim in\n");
                 
                 check_ticket=ticketsview.objects.filter(row=row,seat=seat,match=current_match)
-                check_ticket.seat_status = True;
-                check_ticket.user = userobj;
-                check_ticket.save();
+                for k in check_ticket:
+                    k.seat_status=True;
+                    k.user = userobj;
+                    k.save();
+                    print("\nadded and saved\n");
+                return Response(status=status.HTTP_200_OK);
                 # if not check_ticket:
                 #     ticket = ticketsview(user=userobj, match = current_match,row=row , seat=seat);
                 #     ticket.save()
@@ -198,18 +211,21 @@ def AddTicket(request , username):
                 # else:
                 #     return Response(status=status.HTTP_403_FORBIDDEN);
             else:
+                print("\nim in there are multiple clashing\n");
                 for i in clashing_matches:
-                    if i==current_match:
-                        continue;
-                    clash = ticketsview.objects.filter(user = userobj , match = i , seat_status=False)
-                    if clash:
-                        return Response(status=status.HTTP_401_UNAUTHORIZED);
-                else:
-                    check_ticket.seat_status = True;
-                    check_ticket.user = userobj
-                    check_ticket.save();
-                    return Response(status=status.HTTP_200_OK);
+                    if i!=current_match:
+                        clash = ticketsview.objects.filter(user = userobj , match = i , seat_status=True)
+                        if clash.count()>0:
+                            return Response(status=status.HTTP_401_UNAUTHORIZED);
+                check_ticket=ticketsview.objects.filter(row=row,seat=seat,match=current_match)
+                for k in check_ticket:
+                    k.seat_status=True;
+                    k.user = userobj;
+                    k.save();
+                    print("\nadded and saved\n");
+                return Response(status=status.HTTP_200_OK);
         else:
+            print("\nstate is false\n");
             return Response(status=status.HTTP_200_OK);
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST);
