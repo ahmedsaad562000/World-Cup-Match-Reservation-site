@@ -10,7 +10,7 @@ function Approve(props) {
             method: "GET"
         }).then((res) => {
             if (res.status !== 200) {
-                alert("Error: " + res.status);
+                alert("Server Error ");
             }
             else {
                 Approvechange(true);

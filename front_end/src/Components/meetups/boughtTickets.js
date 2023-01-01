@@ -46,8 +46,12 @@ function BouhgtTickets(props) {
             }
         ).then((res) => {
             console.log(meetupData);
-            if (res.status !== 200) {
+            if (res.status === 403) {
                 alert("Can't delete a tickets before 3 days of match ");
+            }
+            else if(res.status !== 200)
+            {
+                alert(" Server Error");
             }
             else {
                 alert("Removed Succesfuly");

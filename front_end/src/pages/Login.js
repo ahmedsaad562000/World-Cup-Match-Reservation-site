@@ -85,7 +85,7 @@ function Login() {
         ).then((res) => {
             console.log(meetupData);
             if (res.status !== 200) {
-                alert("Error: " + res.status);
+                alert("Error ");
             }
             else {
                 alert("You Signed Up Succesfully");

@@ -12,7 +12,7 @@ function AdminContent(props) {
                 method: "DELETE"
             }).then((res) => {
                 if (res.status !== 200) {
-                    alert("Error: " + res.status);
+                    alert("Server Error");
                 }
                 else {
                     alert('Removed successfully.')
