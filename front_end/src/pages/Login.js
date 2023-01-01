@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
 import { useRef, useState } from 'react';
+import axios from "axios";
 
 function Login(props) {
     const Navigate = useNavigate();
     function navigateHandler(url) {
         Navigate(url);
     }
-
 
     const [signInSugnUp, setSignInSignUp] = useState("signIn");
 
@@ -26,28 +26,42 @@ function Login(props) {
     const FemaleRef = useRef();
     const RoleRef = useRef();
 
+
+    function SaveToLocalStorage(data) {
+        var LoggedIn = [];
+
+        //Add Data Of New User
+        LoggedIn.push({
+            username: data.username,
+            role: data.role,
+        })
+
+        localStorage.setItem('LoggedIn', JSON.stringify(LoggedIn));
+    }
+
+    const postMechanic = (meetupData) =>
+        axios
+            .post("http://localhost:8000/api/login/", meetupData)
+            .then((response) => {
+                return response;
+            });
+
     function SignINHandler(meetupData) {
-        fetch(
-            `http://localhost:8000/api/login/${UserSignINRef.current.value}&${PassSignINRef.current.value}`,
-            {
-                method: 'POST',
-                body: JSON.stringify(meetupData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        ).then((res) => {
-            console.log(meetupData);
+        postMechanic(meetupData).then((res) => {
             if (res.status !== 200) {
                 alert("Error: " + res.status);
             }
-            else if(res.status === 403)
-            {
+            else if (res.status === 403) {
                 alert("Error: No User with this data");
             }
             else {
-                console.log(`response is: ${res.json()} ${res.status}`);
-                navigateHandler('/Home');
+                if (res.data.role === 'A') {
+                    navigateHandler('/admin');
+                }
+                else {
+                    SaveToLocalStorage(res.data);
+                    navigateHandler('/Home');
+                }
             }
         }).catch((err) => {
             console.log(err);
@@ -70,6 +84,7 @@ function Login(props) {
                 alert("Error: " + res.status);
             }
             else {
+                alert("You Signed Up Succesfully");
                 setSignInSignUp("signIn")
             }
         }).catch((err) => {
@@ -88,12 +103,10 @@ function Login(props) {
         };
 
         var password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        if (!password_pattern.test(PassWord))
-        {
+        if (!password_pattern.test(PassWord)) {
             alert("Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number");
         }
-        else
-        {
+        else {
             /*Local Storage*/
 
             SignINHandler(meetupData);
@@ -103,7 +116,15 @@ function Login(props) {
     function ValidateSignUP(event) {
         event.preventDefault();
 
-        var Array = FullNameNRef.current.value.split(" ");
+
+        var Array=[];
+        console.log(FullNameNRef.current.value);
+        if (FullNameNRef.current.value.indexOf(" ") !== -1)
+            Array = FullNameNRef.current.value.split(" ");
+        else {
+            Array[0] = FullNameNRef.current.value;
+            Array[1] = "";
+        }
 
         let G;
         if (MaleRef.current.checked) {
@@ -151,9 +172,11 @@ function Login(props) {
         else if (REPassWord !== PassWord) {
             alert("Unamtched Passwords");
         }
-        else if(!email_pattern.test(EMail))
-        {
+        else if (!email_pattern.test(EMail)) {
             alert("Invalid Email, valid email is in form of: Name@mail.com");
+        }
+        else if (LastName === null || LastName === "") {
+            alert("Please enter at least 2 names in your full-name");
         }
         else {
             addUserHandler(meetupData);
@@ -228,9 +251,9 @@ function Login(props) {
                                     </div>
                                     <div className="options_type">
                                         <div className="type">
-                                            <input type="radio" required id="female" value="female" name="gender" ref={FemaleRef} />
+                                            <input type="radio" required id="female" value="F" name="gender" ref={FemaleRef} />
                                             <label htmlFor="female" style={{ color: "white", marginRight: "20px" }}>Female</label>
-                                            <input type="radio" required id="male" value="male" name="gender" ref={MaleRef} />
+                                            <input type="radio" required id="male" value="M" name="gender" ref={MaleRef} />
                                             <label htmlFor="male" style={{ color: "white" }}>Male</label>
                                         </div>
                                         <div className="options">

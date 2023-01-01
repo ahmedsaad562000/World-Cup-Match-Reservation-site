@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import TicketsContext from '../../pages/store/UserTickets_Context';
 
 import classes from './MainNavigation.module.css';
@@ -8,23 +7,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function MainNavigation(props) {
 
-  const BoughtTickets = useContext(TicketsContext);
-
-  const [Manager, Setmanager] = useState(false);
-  const [Fan, SetFan] = useState(false);
-  function Manag() {
-    Setmanager(true);
-  }
-  function user_fan() {
-    SetFan(true);
-  }
-
-  function CheckUser() {
-
+  function LoggingOut()
+  {
+    localStorage.removeItem('LoggedIn');
   }
 
   function WhatUser() {
-    if (Manager) {
+    var LoggedIn=localStorage.getItem('LoggedIn');
+    LoggedIn=JSON.parse(LoggedIn);
+
+    console.log(`navig: ${LoggedIn[0]["role"]}`);
+    if (LoggedIn[0]["role"] === 'M') {
       return (
         <header className={classes.header}>
           <div className={classes.logo}>Marhaba</div>
@@ -47,7 +40,7 @@ function MainNavigation(props) {
               </li>
 
               <li>
-                <Link to='/'>Logout</Link>
+                <Link to='/' onClick={LoggingOut}>Logout</Link>
               </li>
             </ul>
           </nav>
@@ -56,7 +49,7 @@ function MainNavigation(props) {
 
     }
 
-    else if (!Fan) {
+    else if (LoggedIn[0]["role"] === 'F') {
       return (
         <header className={classes.header}>
           <div className={classes.logo}>Marhaba</div>
@@ -70,19 +63,18 @@ function MainNavigation(props) {
                 <Link to='/Profile'>Profile</Link>
               </li>
 
-              
               <li>
                 <Link to='/Matches'>Matches</Link>
               </li>
 
               <li>
                 <Link to='/YourTickets'>Your Tickets
-                <span className={classes.badge}>{BoughtTickets.totaltickets}</span>
+                <span className={classes.badge}>{props.Ticketsnum}</span>
                 </Link>
               </li>
 
               <li>
-                <Link to='/'>Logout</Link>
+                <Link to='/' onClick={LoggingOut}>Logout</Link>
               </li>
             </ul>
           </nav>

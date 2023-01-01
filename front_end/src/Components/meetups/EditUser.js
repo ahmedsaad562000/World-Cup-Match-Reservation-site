@@ -1,93 +1,170 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Card from "../ui/Card";
 import classes from './NewStadiumForm.module.css';
 
 function EditUser(props) {
+    const [MaleFemale, setMaleFemale] = useState();
+    // const [Passo, SetPasso] = useState("false");
+    let Passo="false";
+    var theRole;
 
-    const idRef = useRef();
+    var LoggedIn = localStorage.getItem('LoggedIn');
+    LoggedIn = JSON.parse(LoggedIn);
+
+    const [loadedMeetups, setLoadedMeetups] = useState([]);
+    useEffect(() => {
+        fetch(
+            `http://localhost:8000/api/getuser/${LoggedIn[0]["username"]}`
+        )
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                // console.log(`Data is: ${data}`);
+                const meetup = data;
+                // console.log(`meetup is: ${JSON.stringify(meetup)}`);
+                setLoadedMeetups(meetup);
+                setMaleFemale(meetup.gender);
+            });
+    }, []);
+
+    if (loadedMeetups.role === 'F') {
+        theRole = "Fan";
+    }
+    else {
+        theRole = "Manager";
+    }
+
     const usernameRef = useRef();
+    const oldpasswordRef = useRef();
     const passwordRef = useRef();
+    const ConpasswordRef = useRef();
     const fisrtNameRef = useRef();
     const lastNameRef = useRef();
     const emailRef = useRef();
     const birthRef = useRef();
-    const genderRef = useRef();
+    const MgenderRef = useRef();
+    const FgenderRef = useRef();
     const NationRef = useRef();
     const roleRef = useRef();
 
     function submitHandler(event) {
         event.preventDefault();
-
-        const ID = idRef.current.value;
-        const UserName = usernameRef.current.value;
+        
+        var Gndr;
+        if(MaleFemale ==='M')
+        {
+            Gndr=MgenderRef.current.value;
+        }
+        else
+        {
+            Gndr=FgenderRef.current.value;
+        }
+        const oldPassword = oldpasswordRef.current.value;
         const Password = passwordRef.current.value;
+        const conPassword = ConpasswordRef.current.value;
         const firstName = fisrtNameRef.current.value;
         const lastName = lastNameRef.current.value;
-        const Email = emailRef.current.value;
         const birthdate = birthRef.current.value;
-        const Gender = genderRef.current.value;
+        const Gender = Gndr;
         const Nation = NationRef.current.value;
-        const Role = roleRef.current.value;
 
-        const meetupData = {
-            id: ID,
-            username: UserName,
-            pass: Password,
-            first_name: firstName,
-            last_name: lastName,
-            email: Email,
-            birth: birthdate,
-            gender: Gender,
-            nationality: Nation,
-            role: Role,
-        };
+        /*Paswords check*/
+        console.log(oldpasswordRef.current.value.length);
+        if (oldpasswordRef.current.value.length !== 0 || passwordRef.current.value.length !== 0 || ConpasswordRef.current.value.length !== 0 ) {
+            Passo="true";
+            console.log(Passo);
+        }
+        else {
+            Passo="false";
+            console.log(Passo);
+        }
+        console.log(Passo);
 
-        props.onAddMeetup(meetupData);
-        props.onConfirm();
+        var password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        if (loadedMeetups.password !== oldPassword && Passo==="true") {
+            alert("You Entered Wrong Password");
+        }
+        else if (!password_pattern.test(Password) && Passo==="true") {
+            alert("Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number");
+        }
+        else if (conPassword !== Password && Passo==="true") {
+            alert("Unamtched Passwords");
+        }
+        else if(Passo==="true")
+        {
+            const meetupData = {
+                password: Password,
+                first_name: firstName,
+                last_name: lastName,
+                birthdate: birthdate,
+                gender: Gender,
+                nationality: Nation,
+            };
+            props.onAddMeetup(meetupData);
+        }
+        else {
+            const meetupData = {
+                password: loadedMeetups.password,
+                first_name: firstName,
+                last_name: lastName,
+                birthdate: birthdate,
+                gender: Gender,
+                nationality: Nation,
+            };
+            props.onAddMeetup(meetupData);
+        }
     }
-
 
     return (
         <Card>
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor='username'><span className={classes.vip}>User</span>Name</label>
-                    <input type='text' placeholder='username' required id='username' ref={usernameRef} disabled />
+                    <input type='text' placeholder='username' required id='username' ref={usernameRef} disabled value={loadedMeetups.username} />
+                </div>
+                <div className={classes.control}>
+                    <label htmlFor='opass'><span className={classes.vip}>Old</span> Password</label>
+                    <input type='password' placeholder='password' required={Passo === "true" ? true : false} id='opass' ref={oldpasswordRef} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='pass'><span className={classes.vip}>Pass</span>word</label>
-                    <input type='password' placeholder='password' required id='pass' ref={passwordRef} />
+                    <input type='password' placeholder='password' required={Passo === "true" ? true : false} id='pass' ref={passwordRef} />
+                </div>
+                <div className={classes.control}>
+                    <label htmlFor='cpass'><span className={classes.vip}>Confirm</span> Password</label>
+                    <input type='password' placeholder='password' required={Passo === "true" ? true : false} id='cpass' ref={ConpasswordRef} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='first_name'><span className={classes.vip}>First</span> Name</label>
-                    <input type='text' placeholder='First name' required id='first_name' ref={fisrtNameRef} />
+                    <input type='text' placeholder='First name' required id='first_name' ref={fisrtNameRef} defaultValue={loadedMeetups.first_name} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='last_name'><span className={classes.vip}>Last</span> Name</label>
-                    <input type='text' placeholder='Second name' required id='last_name' ref={lastNameRef} />
+                    <input type='text' placeholder='Second name' required id='last_name' ref={lastNameRef} defaultValue={loadedMeetups.last_name} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='email'>Email</label>
-                    <input type='email' placeholder='Email' required id='email' ref={emailRef} disabled/>
+                    <input type='email' placeholder='Email' required id='email' ref={emailRef} disabled value={loadedMeetups.email} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='birth'><span className={classes.vip}>Birth</span>date</label>
-                    <input type='date' defaultValue={"2022-08-20"} required id='birth' ref={birthRef} />
+                    <input type='date' required id='birth' ref={birthRef} defaultValue={loadedMeetups.birthdate} />
                 </div>
-
-
 
                 <div className="options_type">
                     <div className="type">
-                        <input type="radio" id="gender" value="female" name="gender" ref={genderRef} />
+                        <input type="radio" required id="gender" value="F" name="gender" ref={FgenderRef} checked={MaleFemale === "F" ? true : false} onClick={() => setMaleFemale('F')} />
                         <label htmlFor="female" style={{ color: "#9c1458", marginRight: "20px" }}>Female</label>
-                        <input type="radio" id="gender" value="male" name="gender" ref={genderRef} />
+                        <input type="radio" required id="gender" value="M" name="gender" ref={MgenderRef} checked={MaleFemale === "M" ? true : false} onClick={() => setMaleFemale('M')} />
                         <label htmlFor="male" style={{ color: "#9c1458" }}>Male</label>
                     </div>
                     <div className="options">
                         <label htmlFor="nationality">Nationality</label>
-                        <select name="nationality" id="nationality" ref={NationRef} style={{ backgroundColor: "#9c1458", color: 'whitesmoke'}}>
-                            <option value="">-- select one --</option>
+                        <select name="nationality" id="nationality" ref={NationRef} style={{ backgroundColor: "#9c1458", color: 'whitesmoke' }}>
+                            <option value={loadedMeetups.nationality} selected disabled hidden>{loadedMeetups.nationality}</option>
                             <option value="afghan">Afghan</option>
                             <option value="albanian">Albanian</option>
                             <option value="algerian">Algerian</option>
@@ -283,16 +360,15 @@ function EditUser(props) {
                         </select>
                     </div>
                 </div>
-                <div className="options_type" style={{marginTop: '-40px'}}>
+                <div className="options_type" style={{ marginTop: '-40px' }}>
                     <div className="type">
                         <label htmlFor="">Role</label>
-                        <select name="role" id="role" ref={roleRef}  style={{ backgroundColor: "#9c1458" }} disabled>
+                        <select name="role" id="role" ref={roleRef} style={{ backgroundColor: "#9c1458" }} disabled>
                             {/* role from local storage */}
-                            <option value="">{props.role}</option>
+                            <option value={loadedMeetups.role}>{theRole}</option>
                         </select>
                     </div>
                 </div>
-
 
                 <div className={classes.actions}>
                     <button>Update</button>

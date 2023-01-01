@@ -32,9 +32,9 @@ function NewStadiumForm(props) {
   {
     event.preventDefault();
 
-    if(rowInputRef.current.value<=0 || rowInputRef.current.value>10 || colInputRef.current.value <=0 || colInputRef.current.value >10 )
+    if(rowInputRef.current.value<=0 || rowInputRef.current.value>5 || colInputRef.current.value <=0 || colInputRef.current.value >10 )
     {
-      alert("Rows And Seats must be in range 1-10");
+      alert("Rows must be in range 0-5 And Seats must be in range 1-10");
     }
     else{
       submitHandler();

@@ -6,16 +6,17 @@ import TicketsList from "../Components/meetups/TicketsList";
 import TicketsContext from "./store/UserTickets_Context";
 
 function YourTickets() {
-  const BoughtTickets = useContext(TicketsContext);
-
   const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
+
+  var LoggedIn = localStorage.getItem('LoggedIn');
+  LoggedIn = JSON.parse(LoggedIn);
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
       /*Get user name from local storage */
-      'http://localhost:8000/api/tickets/'
+      `http://localhost:8000/api/tickets/${LoggedIn[0]["username"]}`
     )
       .then((response) => {
         return response.json();
@@ -37,6 +38,8 @@ function YourTickets() {
       });
   }, []);
 
+  console.log(loadedMeetups);
+
   if (isLoading) {
     return (
       <Layout>
@@ -49,8 +52,8 @@ function YourTickets() {
 
   let content;
 
-  if (BoughtTickets.totaltickets === 0) {
-    content = <div style={{ color: '#9c1458', width: '50%', height: '20vh', textAlign: 'center', margin: 'auto', fontSize: '20px', fontWeight: 'bolder', fontFamily: 'sans-serif', backgroundColor: 'white', paddingTop: '10%' }}>No Tickets yet</div>
+  if (loadedMeetups.length === 0) {
+    content = <div style={{ color: 'white', width: '50%', height: '20vh', textAlign: 'center', margin: 'auto', fontSize: '20px', fontWeight: 'bolder', fontFamily: 'sans-serif', backgroundColor: '#9c1458', paddingTop: '10%' }}>No Tickets yet</div>
   }
   else
   {
@@ -58,9 +61,9 @@ function YourTickets() {
   }
 
   return (
-    <Layout>
+    <Layout TicketsNum={loadedMeetups.length}>
       <section>
-        <h1>Your Tickets</h1>
+        <h1 style={{color:'#800040' ,width:'50%', margin:'auto'}}>Your Tickets</h1>
         {content}
       </section>
     </Layout>

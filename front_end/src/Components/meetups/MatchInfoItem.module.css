@@ -90,3 +90,10 @@
   .actions button:active {
     background-color: #ffe2ed;
   }
+
+  .divaya
+  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
