@@ -111,12 +111,23 @@ def AddMatch(request):
     serializer = Matches_add_Serializer(data=request.data)
     
     if serializer.is_valid():
-            #Hisa Check
+            #Hisa Checks
             curr_match_date = serializer.validated_data.get('date')
             curr_match_time = serializer.validated_data.get('time')
             start = datetime(2000, 1, 1,hour=curr_match_time.hour, minute=curr_match_time.minute, second=curr_match_time.second)
+            h_team_name = serializer.validated_data.get('h_team')
+            a_team_name = serializer.validated_data.get('a_team')
+            h_teamobj = teamsview.objects.get(name=h_team_name);
+            a_teamobj = teamsview.objects.get(name=a_team_name);
+            #########################################################
+            #1- no team of the two teams has match in the same day
+            #########################################################
+            first_clashing_matches = matchview.objects.filter(Q(date=curr_match_date) , Q(a_team=h_teamobj) | Q(h_team=h_teamobj) | Q(h_team=a_teamobj) | Q(a_team=a_teamobj));
+            if first_clashing_matches.count() > 0:
+                return Response(status=status.HTTP_401_UNAUTHORIZED);
 
 
+            ############################################################
             curr_match_stadium_name = serializer.validated_data.get('stadium')
             curr_match_stadium = stadiumview.objects.get(name=curr_match_stadium_name)
             time_upper_bound = (start+timedelta(hours=3)).time();
