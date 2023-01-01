@@ -51,7 +51,7 @@ function Login(props) {
     function SignINHandler(meetupData) {
         postMechanic(meetupData).then((res) => {
             if (res.status !== 200) {
-                alert("Error: No User With This Data ");
+                alert(" No User With This Data ");
             }
             else {
                 if (res.data.role === 'A') {
