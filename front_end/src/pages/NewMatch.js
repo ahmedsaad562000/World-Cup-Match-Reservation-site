@@ -22,9 +22,13 @@ function NewMatch() {
       if (res.status === 403) {
         alert(`There is a clashing match at same stadium` );
       }
+      else if(res.status === 401)
+      {
+        alert(`Cant add a team already playing on same day` );
+      }
       else if(res.status === 400)
       {
-        alert(` Invalid Data Entered ` );
+        alert(` There is a match in the stadium starting at the same time ` );
       }
       else if(res.status === 500)
       {

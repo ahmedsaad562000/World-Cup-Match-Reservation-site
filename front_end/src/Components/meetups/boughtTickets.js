@@ -29,9 +29,7 @@ function BouhgtTickets(props) {
     //remove only if confirm deletion
     function ConfirmRemove(meetupData) {
         closeModalHandler();
-        // if (IsBought) {
-        //     BoughtTickets.removeTicket(props.id);
-        // }
+
 
         /*
         * Remove from server
@@ -49,7 +47,7 @@ function BouhgtTickets(props) {
         ).then((res) => {
             console.log(meetupData);
             if (res.status !== 200) {
-                alert("Error: " + res.status);
+                alert("Can't delete a tickets before 3 days of match ");
             }
             else {
                 alert("Removed Succesfuly");

@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { useState, useEffect } from 'react';
 // import TicketsContext from '../../pages/store/UserTickets_Context';
 import TicketsList from "../Components/meetups/TicketsList";
-import TicketsContext from "./store/UserTickets_Context";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 function YourTickets() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +45,7 @@ function YourTickets() {
     return (
       <Layout>
         <section>
-          <p>Loading...</p>
+          <Spinner animation="border" />
         </section>
       </Layout>
     );
@@ -53,17 +54,16 @@ function YourTickets() {
   let content;
 
   if (loadedMeetups.length === 0) {
-    content = <div style={{ color: 'white', width: '50%', height: '15vh', textAlign: 'center', margin: 'auto', fontSize: '20px', fontWeight: 'bolder', fontFamily: 'sans-serif', backgroundColor: '#9c1458', paddingTop: '6%', marginTop: '10%', borderRadius:'10px' }}>No Tickets yet</div>
+    content = <div style={{ color: 'white', width: '50%', height: '15vh', textAlign: 'center', margin: 'auto', fontSize: '20px', fontWeight: 'bolder', fontFamily: 'sans-serif', backgroundColor: '#9c1458', paddingTop: '6%', marginTop: '10%', borderRadius: '10px' }}>No Tickets yet</div>
   }
-  else
-  {
+  else {
     content = <TicketsList meetups={loadedMeetups} />
   }
 
   return (
     <Layout TicketsNum={loadedMeetups.length}>
       <section>
-        <h1 style={{color:'#800040' ,width:'50%', marginLeft:'30%'}}>Your Tickets</h1>
+        <h1 style={{ color: '#800040', width: '50%', marginLeft: '30%' }}>Your Tickets</h1>
         {content}
       </section>
     </Layout>

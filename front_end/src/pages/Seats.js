@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Reservation from '../Components/meetups/CinemaMode';
+import Spinner from 'react-bootstrap/Spinner';
+
+
 function Seats() {
 
   const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +51,7 @@ function Seats() {
   if (isLoading) {
     return (
       <section>
-        <p>Loading...</p>
+        <Spinner animation="border" />
       </section>
     );
   }
