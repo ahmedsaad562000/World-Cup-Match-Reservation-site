@@ -65,7 +65,7 @@ function AdminContent(props) {
                                         <td>{item.email}</td>
                                         <td>{item.role}</td>
                                         <td className="d-flex">
-                                            <Approve state={false} id={item.id} myrole={item.role} username={item.username}></Approve>
+                                            <Approve state={false} id={item.id} myrole={item.role} username={item.username} approvale={item.approved}></Approve>
                                             <button onClick={() => { Removefunction(item.username) }} className="btn btn-danger">Remove</button>
 
                                         </td>
