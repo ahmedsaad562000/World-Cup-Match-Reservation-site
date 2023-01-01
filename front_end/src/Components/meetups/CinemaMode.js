@@ -59,7 +59,7 @@ function Reservation(props) {
   let content;
 
   if (props.role === 'F') {
-    content = <div style={{marginTop:'-3%'}}><button className="btnCheck" onClick={GoBackHandler}  style={{marginBottom:'1%'}}>Go Back</button>
+    content = <div style={{marginTop:'-3%', width:'20%'}}><button className="btnCheck" onClick={GoBackHandler}  style={{marginBottom:'1%'}}>Go Back</button>
                 <button className="btnCheck" onClick={Purchasehandler} >Purchase</button> </div>
   }
   else {

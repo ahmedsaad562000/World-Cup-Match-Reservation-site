@@ -3,7 +3,7 @@ import "./Login.css"
 import { useRef, useState } from 'react';
 import axios from "axios";
 
-function Login(props) {
+function Login() {
     const Navigate = useNavigate();
     function navigateHandler(url) {
         Navigate(url);
@@ -45,7 +45,7 @@ function Login(props) {
             .then((response) => {
                 return response;
             }).catch((err) => {
-                alert(`Error: No User With This Data `);
+                alert(err.response.status);
             });
 
     function SignINHandler(meetupData) {
