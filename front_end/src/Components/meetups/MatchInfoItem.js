@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../ui/Card'
 import classes from './MatchInfoItem.module.css';
-import TicketsContext from '../../pages/store/UserTickets_Context';
+// import TicketsContext from '../../pages/store/UserTickets_Context';
 
-import Modal from "../../Modal";
+// import Modal from "../../Modal";
 import Backdrop from "../../Backdrop";
 import EditMatch from './EditMatch';
 
 function MatchInfoItem(props) {
 
-    const BoughtTickets = useContext(TicketsContext);
+    // const BoughtTickets = useContext(TicketsContext);
 
     const navigate = useNavigate();
 
-    const [modalIsOpen, SetModalIsOpen] = useState(false);
+    // const [modalIsOpen, SetModalIsOpen] = useState(false);
     const [EditIsOpen, SetEditIsOpen] = useState(false);
 
 
@@ -26,31 +26,31 @@ function MatchInfoItem(props) {
     }
 
     //buy only if confirm purchase
-    function ConfirmBuy() {
-        closeModalHandler();
-        BoughtTickets.addTicket({
-            //data to be added for tickets list
-            id: props.id,
-            // h_team: props.H_team,
-            // a_team: props.A_team,
-            // stadium: props.stadium,
-            // date: props.date,
-            // time: props.time,
-            // refree: props.refree,
-            // line1: props.line1,
-            // line2: props.line2,
-            //Reserved seats 
-        })
+    // function ConfirmBuy() {
+    //     closeModalHandler();
+    //     BoughtTickets.addTicket({
+    //         //data to be added for tickets list
+    //         id: props.id,
+    //         // h_team: props.H_team,
+    //         // a_team: props.A_team,
+    //         // stadium: props.stadium,
+    //         // date: props.date,
+    //         // time: props.time,
+    //         // refree: props.refree,
+    //         // line1: props.line1,
+    //         // line2: props.line2,
+    //         //Reserved seats 
+    //     })
 
         /*
         * Add to server
         */
 
-    }
+    // }
 
-    function closeModalHandler() {
-        SetModalIsOpen(false);
-    }
+    // function closeModalHandler() {
+    //     SetModalIsOpen(false);
+    // }
 
     function editmatch() {
         SetEditIsOpen(true);
@@ -86,8 +86,6 @@ function MatchInfoItem(props) {
                 return (
                     <div className={classes.actions}>
                         <button className="btn" onClick={toogleTcketsStateHandler} >Buy Now</button>
-                        {modalIsOpen && <Modal onCancel={closeModalHandler} onConfirm={ConfirmBuy} />}
-                        {modalIsOpen && <Backdrop oncCancel={closeModalHandler} />}
                     </div>
                 );
             }

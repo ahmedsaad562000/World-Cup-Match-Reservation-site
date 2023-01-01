@@ -11,6 +11,7 @@ import NewMatch from "./pages/NewMatch"
 import YourTickets from "./pages/YourTickets"
 import Adminstrator from './pages/AdminPage';
 import Seats from './pages/Seats';
+import Creditcard from './Components/meetups/Creditcard';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path='/NewMatch' element={<NewMatch />} />
         <Route path='/YourTickets' element={<YourTickets />} />
         <Route path='/Seats' element={<Seats />} />
+        <Route path='/creditCard' element={<Creditcard />} />
       </Routes>
   );
 
