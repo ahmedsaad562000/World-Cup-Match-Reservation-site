@@ -156,7 +156,7 @@ def login(request):
             serializer = login_User_Serializer(instance=user);
             pp.pprint(serializer.data)
             return Response(serializer.data , status=status.HTTP_200_OK);
-        elif user.approves==False:
+        elif user.approved==False:
             return Response(status=status.HTTP_401_UNAUTHORIZED);    
 
 
