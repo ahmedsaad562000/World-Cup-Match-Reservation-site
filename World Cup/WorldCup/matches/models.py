@@ -51,7 +51,7 @@ class Tickets(models.Model):
     seat_status = models.BooleanField(default=False , null=False);
     class Meta:
         unique_together = ('match', 'user','row','seat');
-        ordering = ['match']
+        ordering = ['match' , 'row' , 'seat']
 
 
 
