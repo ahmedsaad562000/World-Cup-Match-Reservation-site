@@ -182,22 +182,22 @@ def UpdateMatch(request , match_id):
         if first_clashing_matches.count() > 0:
             for k in first_clashing_matches:
                 if k != match:
-                    return Response(status=status.HTTP_403_FORBIDDEN)
+                    return Response(status=status.HTTP_401_UNAUTHORIZED)
         start = datetime(2000, 1, 1,hour=new_match_time.hour, minute=new_match_time.minute, second=new_match_time.second)
         curr_match_stadium_name = serializer.validated_data.get('stadium')
         curr_match_stadium = stadiumview.objects.get(name=curr_match_stadium_name)
         time_upper_bound = (start+timedelta(hours=3)).time();
         time_lower_bound = (start-timedelta(hours=3)).time();
-        #clashing_matches1 = matchview.objects.filter(date=new_match_date ,stadium=curr_match_stadium , time__gte=start.time() , time__lt=time_upper_bound)
-        clashing_matches = matchview.objects.filter(date=new_match_date ,stadium=curr_match_stadium , time__lt=time_upper_bound, time__gt=time_lower_bound)
+        clashing_matches1 = matchview.objects.filter(date=new_match_date ,stadium=curr_match_stadium , time__gte=start.time() , time__lt=time_upper_bound)
+        clashing_matches = matchview.objects.filter(date=new_match_date ,stadium=curr_match_stadium , time__lt=start.time(), time__gt=time_lower_bound)
         # check=False;
         if clashing_matches.count() >0:
             for i in clashing_matches:
                 if i != match:
                     return Response(status=status.HTTP_403_FORBIDDEN)
-        # for j in clashing_matches1:
-        #     if j != match:
-        #         return Response(status=status.HTTP_403_FORBIDDEN)
+        for j in clashing_matches1:
+            if j != match:
+                return Response(status=status.HTTP_403_FORBIDDEN)
         serializer.save()
         return Response(status=status.HTTP_200_OK)
     else:

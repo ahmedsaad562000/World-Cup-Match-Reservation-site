@@ -17,10 +17,13 @@ function EditMatch(props) {
       }
     ).then((res) => {
       console.log(meetupData);
-      if (res.status !== 200) {
+      if (res.status === 401) {
+        alert(" One of 2 teams has a match at the same time ");
+      }
+      else if (res.status === 403) {
         alert(" There is a clashing match at same stadium ");
       }
-      else {
+      else if (res.status === 200) {
         history('/Matches');
         props.onConfirm();
         window.location.reload(false);
@@ -30,7 +33,7 @@ function EditMatch(props) {
     });
   }
 
-  
+
 
 
   return (

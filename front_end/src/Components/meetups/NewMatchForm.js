@@ -59,17 +59,17 @@ function NewMatchForm(props) {
             submitHandler();
         }
     }
-    
+    // disabled={props.text==="Edit Match" ? true:false}
     return (
         <Card>
             <form className={classes.form} onSubmit={Validate}>
                 <div className={classes.control}>
                     <label htmlFor='Hteam'><span className={classes.vip}>Home</span> Team</label>
-                    <input type='text' required disabled={props.text==="Edit Match" ? true:false} id='Hteam' ref={homeTeamRef} defaultValue={props.H_team} style={{height: '30px'}} />
+                    <input type='text' required  id='Hteam' ref={homeTeamRef} defaultValue={props.H_team} style={{height: '30px'}} />
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='Ateam'><span className={classes.vip}>Away</span> Team</label>
-                    <input type='text' required disabled={props.text==="Edit Match" ? true:false} id='Ateam' ref={awayTeamRef} defaultValue={props.A_team} style={{height: '30px'}}/>
+                    <input type='text' required  id='Ateam' ref={awayTeamRef} defaultValue={props.A_team} style={{height: '30px'}}/>
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='Stad'><span className={classes.vip}>Stadium</span> Name</label>

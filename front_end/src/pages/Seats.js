@@ -59,7 +59,7 @@ function Seats() {
     <section
       style={{
         backgroundImage:
-          "url('https://d3hnfqimznafg0.cloudfront.net/images/Article_Images/ImageForArticle_365(1).jpg')",
+          "url('https://i.ibb.co/z7KX1Pf/original-26a355d6d0e471c178633925da9ae4a0.webp')",
         height: "100vh",
         overflow: "hidden",
         backgroundRepeat: "no-repeat",

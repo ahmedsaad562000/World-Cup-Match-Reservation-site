@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import "../../pages/Globalvariable"
 
 function Creditcard(props) {
-  
+
   const navigate = useNavigate();
   var LoggedIn = localStorage.getItem('LoggedIn');
   LoggedIn = JSON.parse(LoggedIn);
 
-  
+
   function Fetching(DataToFetch) {
     fetch(
       `http://localhost:8000/api/addticket/${LoggedIn[0]["username"]}/`,
@@ -32,8 +32,7 @@ function Creditcard(props) {
     });
   }
 
-  function confirmReserve(event)
-  {
+  function confirmReserve(event) {
     event.preventDefault();
     for (let i = 0; i < global.arrreserved.length; i++) {
       if (global.arrreserved[i].seat_status === true) {
@@ -58,7 +57,7 @@ function Creditcard(props) {
         </div>
         <div className="inputBox">
           <span>card number</span>
-          <input type="text" className="card-number-input" required  minLength={14} maxLength={14} />
+          <input type="text" className="card-number-input" required minLength={14} maxLength={14} />
         </div>
         <div className="inputBox">
           <span>card holder</span>
@@ -108,7 +107,7 @@ function Creditcard(props) {
             <input type="text" minLength={3} maxLength={3} className="cvv-input" required />
           </div>
         </div>
-        <input type="submit" value="submit" className="submit-btn"  />
+        <input type="submit" value="submit" className="submit-btn" />
       </form>
     </div>
   );

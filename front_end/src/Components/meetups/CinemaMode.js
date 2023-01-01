@@ -6,11 +6,18 @@ import Vedio from "../../imgs/videoplayback.webm";
 
 function Reservation(props) {
 
+  global.countofseats=0;
+
   const navigate = useNavigate();
   global.arrreserved = props.matchData;
 
   function Purchasehandler() {
-    navigate('/creditCard');
+    console.log(`The purchase: ${global.countofseats}`);
+    if (global.countofseats > 0)
+      navigate('/creditCard');
+    else {
+      alert("You Should Select at least 1 chair to purchase");
+    }
   }
 
 
@@ -27,9 +34,10 @@ function Reservation(props) {
   let content;
 
   if (props.role === 'F') {
+    console.log(`the first count is: ${global.countofseats}`);
     content = <div style={{ marginTop: '-3%', width: '20%' }}>
       <button className="btnCheck" onClick={GoBackHandler} style={{ marginBottom: '1%' }}>Go Back</button>
-      <button className="btnCheck" onClick={Purchasehandler} >Purchase</button>
+      <button className="btnCheck" onClick={Purchasehandler}>Purchase</button>
     </div>
   }
   else {
