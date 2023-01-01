@@ -219,7 +219,7 @@ function Login(props) {
                                     </div>
                                     <div className="hr"></div>
                                     <div className="foot-lnk">
-                                        <a href="#" onClick={guestHandler} style={{ color: "white" }}>Continue as a Guest</a>
+                                        <a href="" onClick={guestHandler} style={{ color: "white" }}>Continue as a Guest</a>
                                     </div>
                                 </div>
                             </form>

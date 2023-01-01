@@ -7,81 +7,82 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function MainNavigation(props) {
 
-  function LoggingOut()
-  {
+  function LoggingOut() {
     localStorage.removeItem('LoggedIn');
   }
 
   function WhatUser() {
-    var LoggedIn=localStorage.getItem('LoggedIn');
-    LoggedIn=JSON.parse(LoggedIn);
+    var LoggedIn = localStorage.getItem('LoggedIn');
+    LoggedIn = JSON.parse(LoggedIn);
 
-    console.log(`navig: ${LoggedIn[0]["role"]}`);
-    if (LoggedIn[0]["role"] === 'M') {
-      return (
-        <header className={classes.header}>
-          <div className={classes.logo}>Marhaba</div>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/Home'>Home</Link>
-              </li>
+    if (LoggedIn) {
 
-              <li>
-                <Link to='/Matches'>Matches</Link>
-              </li>
+      if (LoggedIn[0]["role"] === 'M') {
+        return (
+          <header className={classes.header}>
+            <div className={classes.logo}>Marhaba</div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to='/Home'>Home</Link>
+                </li>
 
-              <li>
-                <Link to='/NewMatch'>Add Match</Link>
-              </li>
+                <li>
+                  <Link to='/Matches'>Matches</Link>
+                </li>
 
-              <li>
-                <Link to='/new-stadium'>Add Stadium</Link>
-              </li>
+                <li>
+                  <Link to='/NewMatch'>Add Match</Link>
+                </li>
 
-              <li>
-                <Link to='/' onClick={LoggingOut}>Logout</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-      );
+                <li>
+                  <Link to='/new-stadium'>Add Stadium</Link>
+                </li>
+
+                <li>
+                  <Link to='/' onClick={LoggingOut}>Logout</Link>
+                </li>
+              </ul>
+            </nav>
+          </header>
+        );
+
+      }
+
+      else if (LoggedIn[0]["role"] === 'F') {
+        return (
+          <header className={classes.header}>
+            <div className={classes.logo}>Marhaba</div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to='/Home'>Home</Link>
+                </li>
+
+                <li>
+                  <Link to='/Profile'>Profile</Link>
+                </li>
+
+                <li>
+                  <Link to='/Matches'>Matches</Link>
+                </li>
+
+                <li>
+                  <Link to='/YourTickets'>Your Tickets
+                    <span className={classes.badge}>{props.Ticketsnum}</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to='/' onClick={LoggingOut}>Logout</Link>
+                </li>
+              </ul>
+            </nav>
+          </header>
+        );
+      }
 
     }
-
-    else if (LoggedIn[0]["role"] === 'F') {
-      return (
-        <header className={classes.header}>
-          <div className={classes.logo}>Marhaba</div>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/Home'>Home</Link>
-              </li>
-
-              <li>
-                <Link to='/Profile'>Profile</Link>
-              </li>
-
-              <li>
-                <Link to='/Matches'>Matches</Link>
-              </li>
-
-              <li>
-                <Link to='/YourTickets'>Your Tickets
-                <span className={classes.badge}>{props.Ticketsnum}</span>
-                </Link>
-              </li>
-
-              <li>
-                <Link to='/' onClick={LoggingOut}>Logout</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-      );
-    }
-
     else {
       return (
         <header className={classes.header}>
