@@ -38,14 +38,13 @@ function AdminContent(props) {
     }, [])
 
     return (
-        <div className="container">
+        <div className="container" style={{backgroundColor:'#2c3e50', color:'white'}}>
             <div>
-
-                <div className="card-body">
-                    <div className="divbtn">
-                        <Link to="/" className="btn btn-success" style={{ marginLeft: "1100px" }}>Log Out</Link>
+                <div className="card-body" style={{color:'white'}}>
+                    <div className="divbtn" style={{marginBottom:'3%'}}>
+                        <Link to="/" className="btn btn-success" style={{ marginLeft: "1100px",marginTop:'3%' }}>Log Out</Link>
                     </div>
-                    <table className="table table-bordered">
+                    <table className="table table-bordered" style={{color:'#ecf0f1'}}>
                         <thead className="bg-dark text-white">
                             <tr>
                                 <td>ID</td>

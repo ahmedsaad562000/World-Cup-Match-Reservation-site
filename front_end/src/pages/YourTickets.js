@@ -40,20 +40,20 @@ function YourTickets() {
 
   console.log(loadedMeetups);
 
-  // if (isLoading) {
-  //   return (
-  //     <Layout>
-  //       <section>
-  //         <p>Loading...</p>
-  //       </section>
-  //     </Layout>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <Layout>
+        <section>
+          <p>Loading...</p>
+        </section>
+      </Layout>
+    );
+  }
 
   let content;
 
   if (loadedMeetups.length === 0) {
-    content = <div style={{ color: 'white', width: '50%', height: '15vh', textAlign: 'center', margin: 'auto', fontSize: '20px', fontWeight: 'bolder', fontFamily: 'sans-serif', backgroundColor: '#9c1458', paddingTop: '5%', marginTop: '10%', borderRadius:'10px' }}>No Tickets yet</div>
+    content = <div style={{ color: 'white', width: '50%', height: '15vh', textAlign: 'center', margin: 'auto', fontSize: '20px', fontWeight: 'bolder', fontFamily: 'sans-serif', backgroundColor: '#9c1458', paddingTop: '6%', marginTop: '10%', borderRadius:'10px' }}>No Tickets yet</div>
   }
   else
   {
