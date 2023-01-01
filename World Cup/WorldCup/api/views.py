@@ -63,7 +63,7 @@ def UserList(request):
 
 @api_view(['GET'])
 def AdminUserList(request):
-    users = userview.objects.filter(Q(role='F')|Q(role='M')).order_by('-role')
+    users = userview.objects.filter(Q(role='F')|Q(role='M')).order_by('-role').order_by('approved')
     serializer = ADMIN_UserSerializer(users, many=True)
     return Response(serializer.data)
 

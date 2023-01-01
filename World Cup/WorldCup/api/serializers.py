@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ADMIN_UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields=['id','username','email','role']
+        fields=['id','username','email','role','approved']
 
 
 class Add_User_Serializer(serializers.ModelSerializer):
