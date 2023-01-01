@@ -260,7 +260,7 @@ function Login() {
                                             <input type="radio" required id="male" value="M" name="gender" ref={MaleRef} />
                                             <label htmlFor="male" style={{ color: "white" }}>Male</label>
                                         </div>
-                                        <div className="options">
+                                        <div className="options" style={{width:'90px'}}>
                                             <select name="role" required id="role" ref={RoleRef}>
                                                 <option value="manager">Manager</option>
                                                 <option value="fan">Fan</option>
