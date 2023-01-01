@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Welcome to PythonGuides</h1>
+
+    {% if user.is_authenticated%}
+    {% if 'user.role' == 'F' %}
+    <p> ana fan</p>
+    {% elif 'user.role' == 'M' %}
+    <p> ana Manager</p>
+    {% else %}
+    <p> ana Admin yla</p>
+    {% endif %}
+
+    <h3>Hi {{user.username}}</h3>
+    <h4>Your type is {{user.role}} </h4>
+    <a href="{% url 'logout_user' %}">Logout</a> <br>
+    {% else %}
+    <a href="{% url 'register' %}">Register</a> <br>
+    <a href="{% url 'register' %}">Login</a>
+    {% endif %}
+</body>
+
+</html>

@@ -44,15 +44,14 @@ function Login(props) {
             .post("http://localhost:8000/api/login/", meetupData)
             .then((response) => {
                 return response;
+            }).catch((err) => {
+                alert(`Error: No User With This Data `);
             });
 
     function SignINHandler(meetupData) {
         postMechanic(meetupData).then((res) => {
             if (res.status !== 200) {
-                alert("Error: " + res.status);
-            }
-            else if (res.status === 403) {
-                alert("Error: No User with this data");
+                alert("Error: No User With This Data ");
             }
             else {
                 if (res.data.role === 'A') {
@@ -117,7 +116,7 @@ function Login(props) {
         event.preventDefault();
 
 
-        var Array=[];
+        var Array = [];
         console.log(FullNameNRef.current.value);
         if (FullNameNRef.current.value.indexOf(" ") !== -1)
             Array = FullNameNRef.current.value.split(" ");
@@ -219,7 +218,7 @@ function Login(props) {
                                     </div>
                                     <div className="hr"></div>
                                     <div className="foot-lnk">
-                                        <a href="#" onClick={guestHandler} style={{ color: "white" }}>Continue as a Guest</a>
+                                        <a href="" onClick={guestHandler} style={{ color: "white" }}>Continue as a Guest</a>
                                     </div>
                                 </div>
                             </form>

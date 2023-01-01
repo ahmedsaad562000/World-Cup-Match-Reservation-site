@@ -24,7 +24,7 @@ function Approve(props) {
     return (
 
         <div>
-            <button hidden={(Aprrovestate === true || props.myrole === 'F') ? true : false} disabled={(Aprrovestate === true || props.myrole === 'F') ? 'disabled' : ''} onClick={clickhandler} className="btn btn-success">Approve</button>
+            <button hidden={(props.approvale || props.myrole === 'F') ? true : false} disabled={(props.approvale || props.myrole === 'F') ? 'disabled' : ''} onClick={clickhandler} className="btn btn-success">Approve</button>
         </div>
     );
 }
