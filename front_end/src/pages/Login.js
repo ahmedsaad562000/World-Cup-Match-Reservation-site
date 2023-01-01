@@ -45,7 +45,12 @@ function Login() {
             .then((response) => {
                 return response;
             }).catch((err) => {
-                alert(err.response.status);
+                if (err.response.status === 401)
+                    alert("Unapproved Manager");
+                else if (err.response.status === 404)
+                    alert("No User With This Data");
+                else if (err.response.status === 500)
+                    alert("Server Error");
             });
 
     function SignINHandler(meetupData) {
