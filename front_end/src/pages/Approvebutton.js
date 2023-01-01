@@ -1,21 +1,30 @@
 import { useState } from "react";
 
-function Approve(props)
-{
-    const [Aprrovestate,Approvechange]=useState(props.state);
+function Approve(props) {
+    const [Aprrovestate, Approvechange] = useState(props.state);
 
 
-    function clickhandler(){
-    
-        Approvechange(true); 
-          // fetch data put true approved  
+    function clickhandler() {
+        // fetch data put true approved  
+        fetch(`http://localhost:8000/api/approve/${props.username}`, {
+            method: "GET"
+        }).then((res) => {
+            if (res.status !== 200) {
+                alert("Error: " + res.status);
+            }
+            else {
+                Approvechange(true);
+                alert('Approved successfully.')
+                window.location.reload();
+            }
+            }).catch((err) => {
+                console.log(err.message)
+            })
     }
-    return(
+    return (
 
         <div>
-            
-
-<button disabled ={Aprrovestate===true ? 'disabled' : ''} onClick={clickhandler} className="btn btn-success">Approve</button> 
+            <button hidden={(Aprrovestate === true || props.myrole === 'F') ? true : false} disabled={(Aprrovestate === true || props.myrole === 'F') ? 'disabled' : ''} onClick={clickhandler} className="btn btn-success">Approve</button>
         </div>
     );
 }
