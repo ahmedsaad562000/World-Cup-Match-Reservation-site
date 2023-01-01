@@ -18,7 +18,7 @@ function EditMatch(props) {
     ).then((res) => {
       console.log(meetupData);
       if (res.status !== 200) {
-        alert("Error: " + res.status);
+        alert(" There is a clashing match at same stadium ");
       }
       else {
         history('/Matches');

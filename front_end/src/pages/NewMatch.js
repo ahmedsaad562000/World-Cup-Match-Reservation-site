@@ -19,10 +19,18 @@ function NewMatch() {
       }
     ).then((res) => {
       console.log(meetupData);
-      if (res.status !== 200) {
-        alert("Error: " + res.status );
+      if (res.status === 403) {
+        alert(`There is a clashing match at same stadium` );
       }
-      else {
+      else if(res.status === 400)
+      {
+        alert(` Invalid Data Entered ` );
+      }
+      else if(res.status === 500)
+      {
+        alert(` Error with server ` );
+      }
+      else if(res.status === 200) {
         history('/Matches');
       }
     }).catch((err) => {

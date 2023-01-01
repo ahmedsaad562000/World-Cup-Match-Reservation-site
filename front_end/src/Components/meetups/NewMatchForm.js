@@ -59,35 +59,7 @@ function NewMatchForm(props) {
             submitHandler();
         }
     }
-
-    // function EditHandler(event) {
-    //     event.preventDefault();       
-
-    //     const HomeTeam = homeTeamRef.current.value;
-    //     const AwayTeam = awayTeamRef.current.value;
-    //     const Stadium = stadiumRef.current.value;
-    //     const MatchDate = dateRef.current.value;
-    //     const MatchTime = timeRef.current.value;
-    //     const MainRefree = mainRefreeRef.current.value;
-    //     const LineManone = lineManOneRef.current.value;
-    //     const LineManTwo = lineManTwoRef.current.value;
-
-    //     const meetupData = {
-    //         Hteam: HomeTeam,
-    //         Ateam: AwayTeam,
-    //         Stad: Stadium,
-    //         Mdate: MatchDate,
-    //         Mtime: MatchTime,
-    //         MainRef: MainRefree,
-    //         LineManOne: LineManone,
-    //         LineManTwo: LineManTwo,
-    //     };
-
-    //     props.onAddMeetup(meetupData);
-    //     props.onConfirm();
-    // }
-
-
+    
     return (
         <Card>
             <form className={classes.form} onSubmit={Validate}>
