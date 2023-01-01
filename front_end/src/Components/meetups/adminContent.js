@@ -6,17 +6,21 @@ function AdminContent(props) {
     const [empdata, empdatachange] = useState(null);
 
 
-
     const Removefunction = (id) => {
         if (window.confirm('Do you want to remove?')) {
-            fetch("http://localhost:8000/employee/" + id, {
+            fetch(`http://localhost:8000/api/deleteuser/${id}`, {
                 method: "DELETE"
             }).then((res) => {
-                alert('Removed successfully.')
-                window.location.reload();
-            }).catch((err) => {
-                console.log(err.message)
-            })
+                if (res.status !== 200) {
+                    alert("Error: " + res.status);
+                }
+                else {
+                    alert('Removed successfully.')
+                    window.location.reload();
+                }
+                }).catch((err) => {
+                    console.log(err.message)
+                })
         }
     }
 
@@ -24,7 +28,7 @@ function AdminContent(props) {
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/employee").then((res) => {
+        fetch("http://localhost:8000/api/adminusers").then((res) => {
             return res.json();
         }).then((resp) => {
             empdatachange(resp);
@@ -57,12 +61,12 @@ function AdminContent(props) {
                                 empdata.map(item => (
                                     <tr key={item.id} >
                                         <td>{item.id}</td>
-                                        <td>{item.name}</td>
+                                        <td>{item.username}</td>
                                         <td>{item.email}</td>
-                                        <td>{item.phone}</td>
+                                        <td>{item.role}</td>
                                         <td className="d-flex">
-                                            <Approve state={false} id={item.id}></Approve>
-                                            <button onClick={() => { Removefunction(item.id) }} className="btn btn-danger">Remove</button>
+                                            <Approve state={false} id={item.id} myrole={item.role} username={item.username}></Approve>
+                                            <button onClick={() => { Removefunction(item.username) }} className="btn btn-danger">Remove</button>
 
                                         </td>
                                     </tr>
