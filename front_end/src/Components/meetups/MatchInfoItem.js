@@ -111,13 +111,27 @@ function MatchInfoItem(props) {
                 </div>
                 <div className={classes.Teams}>
                     <h2>{props.H_team.name}</h2>
+                    <h3 style={{ color: '#9c1458' }}>VS</h3>
                     <h2>{props.A_team.name}</h2>
                 </div>
-                <div className={classes.content}>
-                    <h4>{props.Stadium.name}</h4>
-                    <address>{props.date}</address>
-                    <address className={classes.Time}>{props.time}</address>
-                    <div className={classes.LinesMan}>
+                <div className={`${classes.content} ${classes.divaya}`}>
+                    <div className={classes.content} style={{ width: '30%', margin: 'auto', marginTop: '5px' }}>
+                        <h5 style={{ color: '#800040' }}>Stadium</h5>
+                        <h4 style={{marginTop:'2%'}}>{props.Stadium.name}</h4>
+                    </div>
+
+                    <div className={classes.content} style={{ width: '30%', margin: 'auto', marginTop: '5px' }}>
+                        <h5 style={{ color: '#800040' }}>Date</h5>
+                        <address>{props.date}</address>
+                    </div>
+
+                    <div className={classes.content} style={{ width: '30%', margin: 'auto', marginTop: '5px' }}>
+                        <h5 style={{ color: '#800040' }}>Time</h5>
+                        <address className={classes.Time}>{props.time}</address>
+                    </div>
+
+                    <h5 style={{ color: '#800040' }}>Referees</h5>
+                    <div className={`${classes.LinesMan} ${classes.divaya}`}>
                         <h5>{props.refree}</h5>
                         <h5>{props.line1}</h5>
                         <h5>{props.line2}</h5>
