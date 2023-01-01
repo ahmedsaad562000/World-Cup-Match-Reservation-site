@@ -6,7 +6,7 @@ function MatchInfoList(props) {
     <ul className={classes.list}>
       {props.meetups.map((meetup) => (
         <MatchInfoItem
-          key={meetup.id}
+          // key={meetup.id}
           id={meetup.id}  // Match ID Est5dmha zy ma heya
           H_team={meetup.H_team}
           A_team={meetup.A_team}

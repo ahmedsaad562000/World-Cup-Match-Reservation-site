@@ -1,1 +1,0 @@
-INSERT INTO login_user (id,username,password, role) VALUES ('1','ADMIN','ADMIN','A');

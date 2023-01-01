@@ -18,7 +18,7 @@ return (
     {arr.map((user) => (
    
    global.arrreserved.map(items=>{
-    items.row === propes.row && items.col === user ? global.statee = items.state : items.state=items.state;
+    items.row === propes.row && items.seat === user ? global.statee = items.seat_status : items.seat_status=items.seat_status;
 
 }),
     <Seat rown={propes.row} coln={user} state={global.statee} role={propes.role}  ></Seat>
