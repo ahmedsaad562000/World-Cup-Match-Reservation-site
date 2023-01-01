@@ -146,7 +146,7 @@ def login(request):
         try:
             user = userview.objects.get(username=name , password=password);
         except userview.DoesNotExist:
-            return Response(status=status.HTTP_404_FORBIDDEN);
+            return Response(status=status.HTTP_404_NOT_FOUND);
 
         if user.role=='A' or user.approved==True or user.role=='F':
             # login(request, user);
