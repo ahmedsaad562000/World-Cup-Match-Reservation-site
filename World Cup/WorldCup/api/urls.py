@@ -17,6 +17,7 @@ urlpatterns = [
     path('appusers/',views.ApprovedUserList,name="appusers"),
     path('unappusers/',views.UnapprovedUserList,name="unappusers"),
     path('approve/<str:name>/',views.approveUser,name="approve"),
+    path('adminusers/',views.AdminUserList,name="adminusers"),
     ##############################################################
     #Matches
     path('matches/',matches_views.matchesList,name="matches"),

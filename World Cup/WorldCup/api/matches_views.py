@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import pprint
-
+from django.utils.dateparse import parse_date , parse_time
 from django.contrib.auth import authenticate
 
 from rest_framework.exceptions import ValidationError
@@ -108,6 +108,23 @@ def AddMatch(request):
     serializer = Matches_add_Serializer(data=request.data)
     
     if serializer.is_valid():
+            #Hisa Check
+            curr_match_date = parse_date(serializer.data['date'])
+            curr_match_time = parse_time(serializer.data['time'])
+            start = datetime(2000, 1, 1,hour=curr_match_time.hour, minute=curr_match_time.minute, second=curr_match_time.second)
+
+
+            curr_match_stadium_name = serializer.data['stadium']
+            curr_match_stadium = stadiumview.objects.get(name=curr_match_stadium_name)
+            time_upper_bound = (start+timedelta(hours=3)).time();
+            time_lower_bound = (start-timedelta(hours=3)).time();
+            clashing_matches1 = matchview.objects.filter(date=curr_match_date ,stadium=curr_match_stadium , time__gte=start.time() , time__lt=time_upper_bound)
+            clashing_matches = matchview.objects.filter(date=curr_match_date ,stadium=curr_match_stadium , time__lte=start.time() , time__gt=time_lower_bound)
+            if ((clashing_matches is not None) or (clashing_matches1 is not None)):
+                print(clashing_matches.count())
+                print(clashing_matches1.count())
+                return Response(status=status.HTTP_403_FORBIDDEN);
+
             serializer.save();
             return Response(status=status.HTTP_200_OK);
 

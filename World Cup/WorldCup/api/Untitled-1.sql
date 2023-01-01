@@ -1,5 +1,3 @@
-INSERT INTO matches_teams (name, link)
-VALUES ('hazem', 'asdasda');
-
-INSERT INTO matches_refrees (name)
-VALUES ('hazem');
+UPDATE accounts_user
+SET approved=True
+Where role='F';

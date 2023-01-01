@@ -44,6 +44,5 @@ class User(AbstractUser):
     gender = models.CharField(max_length=1,choices=Gender_Choices , default=Male,null=True);
     email = models.EmailField(unique=True , null = True);
     nationality = models.CharField(max_length=255,null=True ,default="Egyptian");
-    
     def __str__(self):
         return self.username

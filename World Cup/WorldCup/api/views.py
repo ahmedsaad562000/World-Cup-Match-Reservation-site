@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib import messages
 # Create your views here.
-from .serializers import Add_User_Serializer, UserSerializer , NO_Verify_UserSerializer, login_User_Serializer, login_User_check_Serializer
+from .serializers import ADMIN_UserSerializer, Add_User_Serializer, UserSerializer , NO_Verify_UserSerializer, login_User_Serializer, login_User_check_Serializer
 from accounts.models import User as userview
 from django.db.models import Q
 
@@ -32,7 +32,8 @@ def apiOverview(request):
         'All Users List':'http://localhost:8000/api/users',
         'Approved Users List':'http://localhost:8000/api/appusers/',
         'Unapproved Users List':'http://localhost:8000/api/unappusers/',
-		'Stadiums':'----------------------------------------',
+		'Admin Users':'http://localhost:8000/api/adminusers',
+        'Stadiums':'----------------------------------------',
         'Add New Stadium':'http://localhost:8000/api/addstadium/',
         'Get All Stadiums':'http://localhost:8000/api/stadiums/',
         'Matches':'----------------------------------------',
@@ -58,6 +59,12 @@ def apiOverview(request):
 def UserList(request):
     users = userview.objects.all()
     serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def AdminUserList(request):
+    users = userview.objects.filter(Q(role='F')|Q(role='M')).order_by('-role')
+    serializer = ADMIN_UserSerializer(users, many=True)
     return Response(serializer.data)
 
 
@@ -89,6 +96,12 @@ def AddUser(request):
     
     if serializer.is_valid():
             serializer.save();
+            role = serializer.data['role']
+            username = serializer.data['username']    
+            if role == 'F':
+                user = userview.objects.get(username=username);
+                user.approved=True;
+                user.save();
             return Response(status=status.HTTP_200_OK);
 
     else:

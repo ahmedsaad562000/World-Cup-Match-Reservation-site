@@ -13,6 +13,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields=['id','username','password','first_name','last_name','birthdate','email','gender','role','nationality']
 
+class ADMIN_UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields=['id','username','email','role']
+
+
 class Add_User_Serializer(serializers.ModelSerializer):
     class Meta:
         model = User
