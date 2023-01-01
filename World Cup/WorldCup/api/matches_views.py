@@ -128,15 +128,16 @@ def AddMatch(request):
                 print(clashing_matches1.count())
                 return Response(status=status.HTTP_403_FORBIDDEN);
             
-            stadium_name = serializer.validated_data.get('stadium');
-            stadiumobj = stadiumview.objects.get(name=stadium_name);
-            row = stadiumobj.rows;
-            seats_per_row = stadiumobj.seats_per_row;
-
+            # stadium_name = serializer.validated_data.get('stadium');
+            # stadiumobj = stadiumview.objects.get(name=stadium_name);
+            rowses = curr_match_stadium.rows;
+            seats_per_rows = curr_match_stadium.seats_per_row;
+            print(rowses);
+            print(seats_per_rows);
             serializer.save();
-            new_match = matchview.objects.get(date=curr_match_date , time=curr_match_time , stadium =stadiumobj);
-            for i in range(0,row):
-                for j in range(0,seats_per_row):
+            new_match = matchview.objects.get(date=curr_match_date , time=curr_match_time , stadium =curr_match_stadium);
+            for i in range(0,rowses):
+                for j in range(0,seats_per_rows):
                     new_ticket=ticketsview(match=new_match , row=i , seat=j ,seat_status=False);
                     new_ticket.save();
 
@@ -151,12 +152,22 @@ def UpdateMatch(request , match_id):
         match = matchview.objects.get(id=match_id)
     except matchview.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND);
-
-    serializer = Matches_add_Serializer(instance=match,data=request.data)
     
+    serializer = Matches_add_Serializer(instance=match,data=request.data)
+
     #serializer.initial_data['id']=match.id
     #print(serializer.initial_data['id'])
     if serializer.is_valid():
+        new_match_time = serializer.validated_data.get('time');
+        new_match_date = serializer.validated_data.get('date');
+        start = datetime(2000, 1, 1,hour=new_match_time.hour, minute=new_match_time.minute, second=new_match_time.second)
+        curr_match_stadium_name = serializer.validated_data.get('stadium')
+        curr_match_stadium = stadiumview.objects.get(name=curr_match_stadium_name)
+        time_upper_bound = (start+timedelta(hours=3)).time();
+        time_lower_bound = (start-timedelta(hours=3)).time();
+        clashing_matches1 = matchview.objects.filter(date=curr_match_date ,stadium=curr_match_stadium , time__gte=start.time() , time__lt=time_upper_bound)
+        clashing_matches = matchview.objects.filter(date=curr_match_date ,stadium=curr_match_stadium , time__lte=start.time() , time__gt=time_lower_bound)
+
         serializer.save()
         return Response(status=status.HTTP_200_OK)
     else:
