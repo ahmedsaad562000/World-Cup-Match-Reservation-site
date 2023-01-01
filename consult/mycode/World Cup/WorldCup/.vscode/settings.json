@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": true
+            },
+            "previewLimit": 50,
+            "server": "dpg-cei9b202i3mt7qknvab0-a",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "World_Cup",
+            "database": "worldcup_u0y3",
+            "username": "worldcup_admin",
+            "password": "3AzSdpNdv43s7xkLuLVB0fJcWvicOSgI",
+            "connectString": "postgres://worldcup_admin:3AzSdpNdv43s7xkLuLVB0fJcWvicOSgI@dpg-cei9b202i3mt7qknvab0-a.frankfurt-postgres.render.com/worldcup_u0y3"
+        }
+    ]
+}
