@@ -6,8 +6,6 @@ import TicketsList from "../Components/meetups/TicketsList";
 import TicketsContext from "./store/UserTickets_Context";
 
 function YourTickets() {
-  const BoughtTickets = useContext(TicketsContext);
-
   const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
 

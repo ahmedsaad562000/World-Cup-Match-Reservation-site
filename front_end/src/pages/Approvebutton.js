@@ -7,7 +7,7 @@ function Approve(props)
 
     function clickhandler(){
     
-         Approvechange(true); 
+        Approvechange(true); 
           // fetch data put true approved  
     }
     return(
@@ -15,7 +15,7 @@ function Approve(props)
         <div>
             
 
-<button disabled ={Aprrovestate==true ? 'disabled' : ''} onClick={clickhandler} className="btn btn-success">Approve</button> 
+<button disabled ={Aprrovestate===true ? 'disabled' : ''} onClick={clickhandler} className="btn btn-success">Approve</button> 
         </div>
     );
 }
