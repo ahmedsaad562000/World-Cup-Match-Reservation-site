@@ -45,9 +45,10 @@ class Matches(models.Model):
         ordering = ['date', 'time']
 class Tickets(models.Model):
     match = models.ForeignKey(Matches , on_delete=models.CASCADE);
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE);
+    user = models.ForeignKey('accounts.User', on_delete=models.SET_NULL , null=True);
     row = models.SmallIntegerField();
     seat = models.SmallIntegerField();
+    seat_status = models.BooleanField(default=False , null=False);
     class Meta:
         unique_together = ('match', 'user','row','seat');
         ordering = ['match']

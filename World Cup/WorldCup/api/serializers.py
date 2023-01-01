@@ -118,7 +118,7 @@ class Tickets_print_Serializer(serializers.ModelSerializer):
         match_info = Matches_Tickets_Serializer(source='match', many=False)
         class Meta:
             model = Tickets
-            fields = ['id' ,'match_info','row','seat']
+            fields = ['id' ,'match_info','row','seat' , 'seat_status']
             ##add no. 
 class Tickets_add_Serializer(serializers.ModelSerializer):
         class Meta:
@@ -127,7 +127,7 @@ class Tickets_add_Serializer(serializers.ModelSerializer):
 class seatsSerializer(serializers.ModelSerializer):
         class Meta:
             model = Tickets
-            fields = ['row','seat']
+            fields = ['id','row','seat','seat_status']
 
 
 
