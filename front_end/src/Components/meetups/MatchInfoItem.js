@@ -18,9 +18,6 @@ function MatchInfoItem(props) {
     const [modalIsOpen, SetModalIsOpen] = useState(false);
     const [EditIsOpen, SetEditIsOpen] = useState(false);
 
-    const [Manager, Setmanager] = useState(false);
-    const [Fan, SetFan] = useState(false);
-
 
     function buyHandler() {
         SetModalIsOpen(true);
@@ -29,7 +26,6 @@ function MatchInfoItem(props) {
     function toogleTcketsStateHandler() {
         // buyHandler();
 
-        // navigate('/Seats', { matchID: props.id });
         navigate('/Seats', { state: { matchID: props.id, rows: props.Stadium.rows, seats_per_row: props.Stadium.seats_per_row} });
     }
 
@@ -61,14 +57,6 @@ function MatchInfoItem(props) {
         SetModalIsOpen(false);
     }
 
-    function Manag() {
-        Setmanager(true);
-    }
-
-    function user_fan() {
-        SetFan(true);
-    }
-
     function editmatch() {
         SetEditIsOpen(true);
     }
@@ -80,18 +68,25 @@ function MatchInfoItem(props) {
 
 
     function WhatUser() {
-        if (!Manager) {
+        var LoggedIn=localStorage.getItem('LoggedIn');
+        LoggedIn=JSON.parse(LoggedIn);
+        console.log(`match: ${LoggedIn[0]["role"]}`);
+        if (LoggedIn[0]["role"]=== 'M') {
             return (
                 <div className={classes.actions}>
                     <button className="btn" onClick={editmatch}>Edit Info</button>
                     <button className="btn--alt" onClick={toogleTcketsStateHandler}>Seats Status</button>
 
-                    {EditIsOpen && <EditMatch onConfirm={closeeditMatch} matchID={props.id} />}
+                    {EditIsOpen && <EditMatch onConfirm={closeeditMatch} matchID={props.id} H_team={props.H_team.name}
+                     A_team={props.A_team.name} Stadium={props.Stadium.name} 
+                     date={props.date} time={props.time} refree={props.refree}
+                     line1={props.line1} line2={props.line2}
+                     />}
                     {EditIsOpen && <Backdrop oncCancel={closeeditMatch} />}
                 </div>
             );
 
-        } else if (!Fan) {
+        } else if (LoggedIn[0]["role"] === 'F') {
             return (
                 <div className={classes.actions}>
                     <button className="btn" onClick={toogleTcketsStateHandler} >Buy Now</button>

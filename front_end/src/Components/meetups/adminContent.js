@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import Approve from "../../pages/Approvebutton";
-import { Link } from "react-router-dom" 
+import { Link } from "react-router-dom"
 
-function AdminContent(props)
-{
+function AdminContent(props) {
     const [empdata, empdatachange] = useState(null);
-  
-  
+
+
 
     const Removefunction = (id) => {
         if (window.confirm('Do you want to remove?')) {
@@ -34,21 +33,21 @@ function AdminContent(props)
         })
     }, [])
 
-    return(
+    return (
         <div className="container">
             <div>
-            
+
                 <div className="card-body">
                     <div className="divbtn">
-                         <Link to="/" className="btn btn-success" style={{marginLeft:"1100px"}}>Log Out</Link> 
+                        <Link to="/" className="btn btn-success" style={{ marginLeft: "1100px" }}>Log Out</Link>
                     </div>
                     <table className="table table-bordered">
                         <thead className="bg-dark text-white">
                             <tr>
                                 <td>ID</td>
-                                <td>Name</td>
+                                <td>Username</td>
                                 <td>Email</td>
-                                <td>Phone</td>
+                                <td>Role</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
@@ -64,7 +63,7 @@ function AdminContent(props)
                                         <td className="d-flex">
                                             <Approve state={false} id={item.id}></Approve>
                                             <button onClick={() => { Removefunction(item.id) }} className="btn btn-danger">Remove</button>
-                                        
+
                                         </td>
                                     </tr>
                                 ))
@@ -77,12 +76,6 @@ function AdminContent(props)
             </div>
         </div>
     );
-        //content
-     
-
-
-
-    
 }
 
 export default AdminContent;

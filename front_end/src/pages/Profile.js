@@ -7,10 +7,13 @@ function Profile() {
 
     const history = useNavigate();
 
+    var LoggedIn=localStorage.getItem('LoggedIn');
+    LoggedIn=JSON.parse(LoggedIn);
+
     function editUser(meetupData) {
       fetch(
         /*Get user name from local storage */
-        'http://localhost:8000/api/updateuser/',
+        `http://localhost:8000/api/updateuser/${LoggedIn[0]["username"]}/`,
         {
           method: 'POST',
           body: JSON.stringify(meetupData),

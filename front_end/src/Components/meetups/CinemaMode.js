@@ -21,7 +21,7 @@ function Reservation(props) {
       ></iframe>
       <div className="chairs">
         {arr.map((user) => (
-          <Container no={10} row={user}>
+          <Container no={10} row={user} >
             {" "}
           </Container>
         ))}
