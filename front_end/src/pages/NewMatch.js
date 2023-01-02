@@ -30,6 +30,10 @@ function NewMatch() {
       {
         alert(` There is a match in the stadium starting at the same time ` );
       }
+      else if(res.status === 405)
+      {
+        alert(` The date is old ` );
+      }
       else if(res.status === 500)
       {
         alert(` Error with server ` );

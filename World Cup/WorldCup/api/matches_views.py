@@ -1,4 +1,5 @@
 from distutils.command.check import check
+from email.policy import HTTP
 from django.shortcuts import render
 import pprint
 from django.utils.dateparse import parse_date , parse_time
@@ -58,6 +59,10 @@ def ticketsList(request , name):
 @api_view(['GET'])
 def getseats(request , match_id):
     #try:
+        current_match = matchview.objects.get(id=match_id)
+        current_date_right_now = datetime.now().date()
+        if current_date_right_now > current_match.date :
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         seats = ticketsview.objects.filter(match=match_id)
         serializer = seatsSerializer(seats, many=True)
         return Response(serializer.data)
@@ -99,8 +104,8 @@ def AddStadium(request):
     serializer = StadiumsSerializer(data=request.data)
     
     if serializer.is_valid():
-            serializer.save();
-            return Response(status=status.HTTP_200_OK);
+        serializer.save();
+        return Response(status=status.HTTP_200_OK);
 
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST);
@@ -114,6 +119,9 @@ def AddMatch(request):
     if serializer.is_valid():
             #Hisa Checks
             curr_match_date = serializer.validated_data.get('date')
+            current_date_right_now = datetime.now().date()
+            if current_date_right_now > curr_match_date :
+                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
             curr_match_time = serializer.validated_data.get('time')
             start = datetime(2000, 1, 1,hour=curr_match_time.hour, minute=curr_match_time.minute, second=curr_match_time.second)
             h_team_name = serializer.validated_data.get('h_team')
@@ -172,6 +180,9 @@ def UpdateMatch(request , match_id):
 
         new_match_time = serializer.validated_data.get('time');
         new_match_date = serializer.validated_data.get('date');
+        current_date_right_now = datetime.now().date()
+        if current_date_right_now > new_match_date :
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         h_team_name = serializer.validated_data.get('h_team')
         a_team_name = serializer.validated_data.get('a_team')
         h_teamobj = teamsview.objects.get(name=h_team_name);
