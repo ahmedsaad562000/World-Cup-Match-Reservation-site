@@ -59,7 +59,7 @@ function Seats() {
     <section
       style={{
         backgroundImage:
-          "url('https://i.ibb.co/z7KX1Pf/original-26a355d6d0e471c178633925da9ae4a0.webp')",
+          "url('https://dissingweitling.com/assets/upload/_landscape1200/DissingWeitling_lusailbridges_render-night.jpg')",
         height: "100vh",
         overflow: "hidden",
         backgroundRepeat: "no-repeat",

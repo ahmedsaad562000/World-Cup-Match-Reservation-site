@@ -36,7 +36,7 @@ function Reservation(props) {
   if (props.role === 'F') {
     console.log(`the first count is: ${global.countofseats}`);
     content = <div style={{ marginTop: '-3%', width: '20%' }}>
-      <button className="btnCheck" onClick={GoBackHandler} style={{ marginBottom: '1%' }}>Go Back</button>
+      <button className="btnCheck" onClick={GoBackHandler} style={{ marginBottom: '7%' }}>Go Back</button>
       <button className="btnCheck" onClick={Purchasehandler}>Purchase</button>
     </div>
   }
@@ -51,6 +51,7 @@ function Reservation(props) {
       <iframe
         width="700"
         height="400"
+        type="video/mp4"
         autoplay
         loop
         src={Vedio}

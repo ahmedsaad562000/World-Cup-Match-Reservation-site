@@ -55,7 +55,7 @@
     background:#6fea6f;
 }
 .seat.occupied{
-    background:rgb(206, 20, 20);
+    background:#45aaf2;
 }
 .seat:not(.occupied):hover{
     transform:scale(1.5);
@@ -98,11 +98,11 @@
 }
 .btnCheck
 {
-    margin-left: 800px;
-    width: 78px;
+    margin-left: 1000px;
+    width: 120px;
     height: 35px;
     border-radius: 10px;
     color: white;
-    background-color: #9c1458;
-    border-color: #9c1458;
+    background-color: #2980b9;
+    border-color: #2980b9;
 }
