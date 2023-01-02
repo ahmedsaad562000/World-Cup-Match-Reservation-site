@@ -68,6 +68,9 @@ function NewMatchForm(props) {
             console.log("Same Refree Cant be selected more than once");
         }
         else {
+            if (props.text === "Edit Match" && stadiumRef.current.value !== props.Stadium) {
+                alert("Changing match stadium will automatically Delete all match tickets");
+            }
             submitHandler();
         }
     }
@@ -83,6 +86,7 @@ function NewMatchForm(props) {
                         <option value="Australia">Australia</option>
                         <option value="Belgium">Belgium</option>
                         <option value="Brazil">Brazil</option>
+                        <option value="Canada">Canada</option>
                         <option value="Cameroon">Cameroon</option>
                         <option value="Costa Rica">Costa Rica</option>
                         <option value="Croatia">Croatia</option>
@@ -106,6 +110,7 @@ function NewMatchForm(props) {
                         <option value="South Korea">South Korea</option>
                         <option value="Spain">Spain</option>
                         <option value="Switzerland">Switzerland</option>
+                        <option value="Tunisia">Tunisia</option>
                         <option value="United States">United States</option>
                         <option value="Uruguay">Uruguay</option>
                         <option value="Wales">Wales</option>
@@ -119,6 +124,7 @@ function NewMatchForm(props) {
                         <option value="Australia">Australia</option>
                         <option value="Belgium">Belgium</option>
                         <option value="Brazil">Brazil</option>
+                        <option value="Canada">Canada</option>
                         <option value="Cameroon">Cameroon</option>
                         <option value="Costa Rica">Costa Rica</option>
                         <option value="Croatia">Croatia</option>
@@ -170,9 +176,26 @@ function NewMatchForm(props) {
                     <label htmlFor='MainRef'><span className={classes.vip}>Main</span> Refree</label>
                     <select name="teams" ref={mainRefreeRef} style={{ height: '35px' }} >
                         <option value={props.refree} selected disabled hidden>{props.refree}</option>
-                        <option value="Tory">Tory</option>
-                        <option value="Rossy">Rossy</option>
                         <option value="Kara">Kara</option>
+                        <option value="Archie">Archie</option>
+                        <option value="Rossy">Rossy</option>
+                        <option value="Bethany">Bethany</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Jolyn">Jolyn</option>
+                        <option value="Skip">Skip</option>
+                        <option value="Tory">Tory</option>
+                        <option value="Regen">Regen</option>
+                        <option value="Korella">Korella</option>
+                        <option value="Abbott">Abbott</option>
+                        <option value="Tilda">Tilda</option>
+                        <option value="Prue">Prue</option>
+                        <option value="Alfred">Alfred</option>
+                        <option value="Amargo">Amargo</option>
+                        <option value="Anette">Anette</option>
+                        <option value="Frank">Frank</option>
+                        <option value="Gabbie">Gabbie</option>
+                        <option value="Stella">Stella</option>
+                        <option value="Dorice">Dorice</option>
                     </select>
 
                 </div>
@@ -180,9 +203,26 @@ function NewMatchForm(props) {
                     <label htmlFor='LineManOne'>Lineman<span className={classes.vip}> 1</span></label>
                     <select name="teams" ref={lineManOneRef} style={{ height: '35px' }} >
                         <option value={props.line1} selected disabled hidden>{props.line1}</option>
-                        <option value="Tory">Tory</option>
-                        <option value="Rossy">Rossy</option>
                         <option value="Kara">Kara</option>
+                        <option value="Archie">Archie</option>
+                        <option value="Rossy">Rossy</option>
+                        <option value="Bethany">Bethany</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Jolyn">Jolyn</option>
+                        <option value="Skip">Skip</option>
+                        <option value="Tory">Tory</option>
+                        <option value="Regen">Regen</option>
+                        <option value="Korella">Korella</option>
+                        <option value="Abbott">Abbott</option>
+                        <option value="Tilda">Tilda</option>
+                        <option value="Prue">Prue</option>
+                        <option value="Alfred">Alfred</option>
+                        <option value="Amargo">Amargo</option>
+                        <option value="Anette">Anette</option>
+                        <option value="Frank">Frank</option>
+                        <option value="Gabbie">Gabbie</option>
+                        <option value="Stella">Stella</option>
+                        <option value="Dorice">Dorice</option>
                     </select>
 
                 </div>
@@ -190,9 +230,26 @@ function NewMatchForm(props) {
                     <label htmlFor='LineManTwo'>Lineman<span className={classes.vip}> 2</span></label>
                     <select name="teams" ref={lineManTwoRef} style={{ height: '35px' }} >
                         <option value={props.line2} selected disabled hidden>{props.line2}</option>
-                        <option value="Tory">Tory</option>
-                        <option value="Rossy">Rossy</option>
                         <option value="Kara">Kara</option>
+                        <option value="Archie">Archie</option>
+                        <option value="Rossy">Rossy</option>
+                        <option value="Bethany">Bethany</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Jolyn">Jolyn</option>
+                        <option value="Skip">Skip</option>
+                        <option value="Tory">Tory</option>
+                        <option value="Regen">Regen</option>
+                        <option value="Korella">Korella</option>
+                        <option value="Abbott">Abbott</option>
+                        <option value="Tilda">Tilda</option>
+                        <option value="Prue">Prue</option>
+                        <option value="Alfred">Alfred</option>
+                        <option value="Amargo">Amargo</option>
+                        <option value="Anette">Anette</option>
+                        <option value="Frank">Frank</option>
+                        <option value="Gabbie">Gabbie</option>
+                        <option value="Stella">Stella</option>
+                        <option value="Dorice">Dorice</option>
                     </select>
                 </div>
                 <div className={classes.actions}>
