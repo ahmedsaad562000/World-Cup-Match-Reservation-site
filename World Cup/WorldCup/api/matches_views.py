@@ -199,7 +199,25 @@ def UpdateMatch(request , match_id):
         for j in clashing_matches1:
             if j != match:
                 return Response(status=status.HTTP_403_FORBIDDEN)
-        serializer.save()
+
+        ########################################################
+        #valid
+        if (curr_match_stadium != match.stadium):
+            #delete old tickets
+            old_stad_tickets = ticketsview.objects.filter(match=match)
+            for i in old_stad_tickets:
+                old_stad_tickets.delete();
+            #add new tickets
+            #############################################################
+            serializer.save()
+            #############################################################
+            new_match = matchview.objects.get(date=new_match_date , time=new_match_time , stadium =curr_match_stadium);
+            rowseses = curr_match_stadium.rows;
+            seatses = curr_match_stadium.seats_per_row;
+            for k in range(0,rowseses):
+                for j in range(0,seatses):
+                    new_ticket=ticketsview(match=new_match , row=k , seat=j ,seat_status=False);
+                    new_ticket.save();
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
