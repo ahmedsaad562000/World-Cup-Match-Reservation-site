@@ -111,7 +111,7 @@ function NewMatchForm(props) {
                         <option value="Spain">Spain</option>
                         <option value="Switzerland">Switzerland</option>
                         <option value="Tunisia">Tunisia</option>
-                        <option value="United States">United States</option>
+                        <option value="USA">United States</option>
                         <option value="Uruguay">Uruguay</option>
                         <option value="Wales">Wales</option>
                     </select>
@@ -148,7 +148,7 @@ function NewMatchForm(props) {
                         <option value="South Korea">South Korea</option>
                         <option value="Spain">Spain</option>
                         <option value="Switzerland">Switzerland</option>
-                        <option value="United States">United States</option>
+                        <option value="USA">United States</option>
                         <option value="Uruguay">Uruguay</option>
                         <option value="Wales">Wales</option>
                     </select>
