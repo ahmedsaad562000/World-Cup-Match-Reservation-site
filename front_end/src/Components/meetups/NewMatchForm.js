@@ -68,6 +68,9 @@ function NewMatchForm(props) {
             console.log("Same Refree Cant be selected more than once");
         }
         else {
+            if (props.text === "Edit Match" && stadiumRef.current.value !== props.Stadium) {
+                alert("Changing match stadium will automatically Delete all match tickets");
+            }
             submitHandler();
         }
     }
