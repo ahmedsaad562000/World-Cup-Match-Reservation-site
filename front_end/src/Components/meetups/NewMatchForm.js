@@ -170,9 +170,26 @@ function NewMatchForm(props) {
                     <label htmlFor='MainRef'><span className={classes.vip}>Main</span> Refree</label>
                     <select name="teams" ref={mainRefreeRef} style={{ height: '35px' }} >
                         <option value={props.refree} selected disabled hidden>{props.refree}</option>
-                        <option value="Tory">Tory</option>
-                        <option value="Rossy">Rossy</option>
                         <option value="Kara">Kara</option>
+                        <option value="Archie">Archie</option>
+                        <option value="Rossy">Rossy</option>
+                        <option value="Bethany">Bethany</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Jolyn">Jolyn</option>
+                        <option value="Skip">Skip</option>
+                        <option value="Tory">Tory</option>
+                        <option value="Regen">Regen</option>
+                        <option value="Korella">Korella</option>
+                        <option value="Abbott">Abbott</option>
+                        <option value="Tilda">Tilda</option>
+                        <option value="Prue">Prue</option>
+                        <option value="Alfred">Alfred</option>
+                        <option value="Amargo">Amargo</option>
+                        <option value="Anette">Anette</option>
+                        <option value="Frank">Frank</option>
+                        <option value="Gabbie">Gabbie</option>
+                        <option value="Stella">Stella</option>
+                        <option value="Dorice">Dorice</option>
                     </select>
 
                 </div>
@@ -180,9 +197,26 @@ function NewMatchForm(props) {
                     <label htmlFor='LineManOne'>Lineman<span className={classes.vip}> 1</span></label>
                     <select name="teams" ref={lineManOneRef} style={{ height: '35px' }} >
                         <option value={props.line1} selected disabled hidden>{props.line1}</option>
-                        <option value="Tory">Tory</option>
-                        <option value="Rossy">Rossy</option>
                         <option value="Kara">Kara</option>
+                        <option value="Archie">Archie</option>
+                        <option value="Rossy">Rossy</option>
+                        <option value="Bethany">Bethany</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Jolyn">Jolyn</option>
+                        <option value="Skip">Skip</option>
+                        <option value="Tory">Tory</option>
+                        <option value="Regen">Regen</option>
+                        <option value="Korella">Korella</option>
+                        <option value="Abbott">Abbott</option>
+                        <option value="Tilda">Tilda</option>
+                        <option value="Prue">Prue</option>
+                        <option value="Alfred">Alfred</option>
+                        <option value="Amargo">Amargo</option>
+                        <option value="Anette">Anette</option>
+                        <option value="Frank">Frank</option>
+                        <option value="Gabbie">Gabbie</option>
+                        <option value="Stella">Stella</option>
+                        <option value="Dorice">Dorice</option>
                     </select>
 
                 </div>
@@ -190,9 +224,26 @@ function NewMatchForm(props) {
                     <label htmlFor='LineManTwo'>Lineman<span className={classes.vip}> 2</span></label>
                     <select name="teams" ref={lineManTwoRef} style={{ height: '35px' }} >
                         <option value={props.line2} selected disabled hidden>{props.line2}</option>
-                        <option value="Tory">Tory</option>
-                        <option value="Rossy">Rossy</option>
                         <option value="Kara">Kara</option>
+                        <option value="Archie">Archie</option>
+                        <option value="Rossy">Rossy</option>
+                        <option value="Bethany">Bethany</option>
+                        <option value="Pearl">Pearl</option>
+                        <option value="Jolyn">Jolyn</option>
+                        <option value="Skip">Skip</option>
+                        <option value="Tory">Tory</option>
+                        <option value="Regen">Regen</option>
+                        <option value="Korella">Korella</option>
+                        <option value="Abbott">Abbott</option>
+                        <option value="Tilda">Tilda</option>
+                        <option value="Prue">Prue</option>
+                        <option value="Alfred">Alfred</option>
+                        <option value="Amargo">Amargo</option>
+                        <option value="Anette">Anette</option>
+                        <option value="Frank">Frank</option>
+                        <option value="Gabbie">Gabbie</option>
+                        <option value="Stella">Stella</option>
+                        <option value="Dorice">Dorice</option>
                     </select>
                 </div>
                 <div className={classes.actions}>
