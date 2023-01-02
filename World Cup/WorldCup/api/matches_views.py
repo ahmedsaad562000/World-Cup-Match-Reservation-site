@@ -249,7 +249,7 @@ def AddTicket(request , username):
             check_ticket=ticketsview.objects.filter(row=row,seat=seat,match=current_match,seat_status=True)
             if(check_ticket.count()==1):
                 print("ana hna")
-                return Response(status=status.HTTP_200_OK);
+                return Response(status=status.HTTP_403_FORBIDDEN);
             
             clashing_matches = matchview.objects.filter(date = current_match.date ,time__gt=time_lower_bound , time__lt=time_upper_bound)
             print("\n")
