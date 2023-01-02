@@ -86,7 +86,7 @@ function MainNavigation(props) {
     else {
       return (
         <header className={classes.header}>
-          <div className={classes.logo}>Marhaba </div>
+          <div className={classes.logo}>Marhaba</div>
           <nav>
             <ul>
               <li>

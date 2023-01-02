@@ -21,11 +21,12 @@ function Creditcard(props) {
       }
     ).then((res) => {
       console.log(DataToFetch);
-      if (res.status !== 200) {
-        alert(res.status);
+      if (res.status === 401) {
+        alert("You Already have a ticket of a clashing match");
       }
-      else {
-        console.log(res.state);
+      else if(res.status !== 200)
+      {
+        alert("Server Error");
       }
     }).catch((err) => {
       console.log(err);
