@@ -58,7 +58,7 @@ function NewStadiumForm(props) {
         </div>
         <div className={classes.control}>
           <label htmlFor='link'>Stadium Image</label>
-          <input type='url' required id='link' ref={imgInputRef} />
+          <input type='url'  id='link' ref={imgInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor='description'>Description</label>
