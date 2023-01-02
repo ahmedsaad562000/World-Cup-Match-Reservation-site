@@ -1,0 +1,20 @@
+databases:
+  - name: CONSULTATION
+    databaseName: worldcup_u0y3
+    user: worldcup_admin
+
+services:
+  - type: web
+    name: worldcup
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn worldcup.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysite
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

@@ -6,8 +6,7 @@ UPDATE matches_teams
 SET link = 'https://i.ibb.co/dKQhgMM/Screenshot-2022-12-30-192805.png'
 WHERE name = 'Saudi Arabia';
 
-INSERT INTO matches_teams VALUES('France','https://i.ibb.co/r4Pvsdp/Screenshot-2023-01-01-205123.png');
-INSERT INTO matches_teams VALUES('Senegal','https://i.ibb.co/vd5G68V/seneghal.png');
+
 
 UPDATE matches_teams
 SET link = 'https://i.ibb.co/dKQhgMM/Screenshot-2022-12-30-192805.png'
@@ -20,6 +19,9 @@ WHERE name = 'Senegal';
 
 
 
+INSERT INTO matches_teams VALUES('France','https://i.ibb.co/r4Pvsdp/Screenshot-2023-01-01-205123.png');
+
+INSERT INTO matches_teams VALUES('Senegal','https://i.ibb.co/vd5G68V/seneghal.png');
 
 INSERT INTO matches_teams VALUES('Wales','https://i.ibb.co/z2SpDCr/Wales.png');
 
