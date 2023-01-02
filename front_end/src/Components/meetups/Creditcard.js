@@ -24,6 +24,10 @@ function Creditcard(props) {
       if (res.status === 401) {
         alert("You Already have a ticket of a clashing match");
       }
+      else if(res.status === 403)
+      {
+        alert("Another user sab2ak ya bateee2");
+      }
       else if(res.status !== 200)
       {
         alert("Server Error");
