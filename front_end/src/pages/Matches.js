@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '../Components/layout/Layout';
 import MatchInfoList from '../Components/meetups/MatcchInfoList'
+import Spinner from 'react-bootstrap/Spinner';
 
 function MatchesPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +36,7 @@ function MatchesPage() {
     return (
       <Layout>
         <section>
-          <p>Loading...</p>
+          <Spinner animation="border" />
         </section>
       </Layout>
     );

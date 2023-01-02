@@ -29,9 +29,7 @@ function BouhgtTickets(props) {
     //remove only if confirm deletion
     function ConfirmRemove(meetupData) {
         closeModalHandler();
-        // if (IsBought) {
-        //     BoughtTickets.removeTicket(props.id);
-        // }
+
 
         /*
         * Remove from server
@@ -48,8 +46,12 @@ function BouhgtTickets(props) {
             }
         ).then((res) => {
             console.log(meetupData);
-            if (res.status !== 200) {
-                alert("Error: " + res.status);
+            if (res.status === 403) {
+                alert("Can't delete a tickets before 3 days of match ");
+            }
+            else if(res.status !== 200)
+            {
+                alert(" Server Error");
             }
             else {
                 alert("Removed Succesfuly");
@@ -71,15 +73,15 @@ function BouhgtTickets(props) {
                 </div>
                 <div className={`${classes.content} ${classes.divaya}`}>
                     <div className={classes.content} style={{ width: '30%' }}>
-                        <h4 style={{ margin: 'auto' }}>Stadium</h4>
+                        <h4 style={{ margin: 'auto',color:'#800040' }}>Stadium</h4>
                         <h3 style={{ width: '100%', paddingTop: '8px', fontWeight: 'normal', fontSize: '20px', margin: 'auto' }}>{props.match.stadium}</h3>
                     </div>
                     <div className={classes.content} style={{ width: '30%' }}>
-                        <h4 style={{ margin: 'auto' }}>Date</h4>
+                        <h4 style={{ margin: 'auto',color:'#800040' }}>Date</h4>
                         <h3 style={{ width: '100%', paddingTop: '8px', fontWeight: 'normal', fontSize: '20px', margin: 'auto' }}>{props.match.date}</h3>
                     </div>
                     <div className={classes.content} style={{ width: '30%' }}>
-                        <h4 style={{ margin: 'auto' }}>Seat</h4>
+                        <h4 style={{ margin: 'auto',color:'#800040' }}>Seat</h4>
                         <h3 style={{ width: '100%', paddingTop: '8px', fontWeight: 'normal', fontSize: '20px', margin: 'auto' }}>{alphabet[props.row]}{props.seat}</h3>
                     </div>
                 </div>
@@ -88,11 +90,11 @@ function BouhgtTickets(props) {
                     {/* <div className={classes.content} style={{ width: '30%', margin: 'auto', marginTop: '5px' }}>
                     </div> */}
                     <div className={classes.content} style={{ width: '30%', margin: 'auto', marginTop: '5px' }}>
-                        <h4 style={{ margin: 'auto' }}>Time</h4>
+                        <h4 style={{ margin: 'auto',color:'#800040' }}>Time</h4>
                         <h5 style={{ width: '100%', margin: 'auto' }}>{props.match.time}</h5>
                     </div>
                     <div className={classes.content} style={{ width: '30%', margin: 'auto', marginTop: '5px' }}>
-                        <h4 style={{ margin: 'auto' }}>Ticket ID</h4>
+                        <h4 style={{ margin: 'auto' ,color:'#800040'}}>Ticket ID</h4>
                         <h5 style={{ width: '100%', margin: 'auto' }}>{props.id}</h5>
                     </div>
                 </div>

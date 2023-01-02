@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Reservation from '../Components/meetups/CinemaMode';
+import Spinner from 'react-bootstrap/Spinner';
+
+
 function Seats() {
 
   const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +51,7 @@ function Seats() {
   if (isLoading) {
     return (
       <section>
-        <p>Loading...</p>
+        <Spinner animation="border" />
       </section>
     );
   }
@@ -56,7 +59,7 @@ function Seats() {
     <section
       style={{
         backgroundImage:
-          "url('https://d3hnfqimznafg0.cloudfront.net/images/Article_Images/ImageForArticle_365(1).jpg')",
+          "url('https://dissingweitling.com/assets/upload/_landscape1200/DissingWeitling_lusailbridges_render-night.jpg')",
         height: "100vh",
         overflow: "hidden",
         backgroundRepeat: "no-repeat",

@@ -1,47 +1,22 @@
 import "./container.css";
-// import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Container from "./Container";
 import "../../pages/Globalvariable"
 import Vedio from "../../imgs/videoplayback.webm";
+
 function Reservation(props) {
 
+  global.countofseats=0;
+
   const navigate = useNavigate();
-  var LoggedIn = localStorage.getItem('LoggedIn');
-  LoggedIn = JSON.parse(LoggedIn);
-
-
   global.arrreserved = props.matchData;
 
-  function Fetching(DataToFetch) {
-    fetch(
-      `http://localhost:8000/api/addticket/${LoggedIn[0]["username"]}/`,
-      {
-        method: 'POST',
-        body: JSON.stringify(DataToFetch),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    ).then((res) => {
-      console.log(DataToFetch);
-      if (res.status === 200) {
-        navigate('/Matches');
-      }
-      else {
-        console.log(res.state);
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
-
   function Purchasehandler() {
-    for (let i = 0; i < global.arrreserved.length; i++) {
-      if (global.arrreserved[i].seat_status === true) {
-        console.log(global.arrreserved[i]);
-        Fetching(global.arrreserved[i]);
-      }
+    console.log(`The purchase: ${global.countofseats}`);
+    if (global.countofseats > 0)
+      navigate('/creditCard');
+    else {
+      alert("You Should Select at least 1 chair to purchase");
     }
   }
 
@@ -59,8 +34,11 @@ function Reservation(props) {
   let content;
 
   if (props.role === 'F') {
-    content = <div style={{marginTop:'-3%', width:'20%'}}><button className="btnCheck" onClick={GoBackHandler}  style={{marginBottom:'1%'}}>Go Back</button>
-                <button className="btnCheck" onClick={Purchasehandler} >Purchase</button> </div>
+    console.log(`the first count is: ${global.countofseats}`);
+    content = <div style={{ marginTop: '-3%', width: '20%' }}>
+      <button className="btnCheck" onClick={GoBackHandler} style={{ marginBottom: '7%' }}>Go Back</button>
+      <button className="btnCheck" onClick={Purchasehandler}>Purchase</button>
+    </div>
   }
   else {
     content = <button className="btnCheck" onClick={GoBackHandler} >Go Back</button>
@@ -73,6 +51,7 @@ function Reservation(props) {
       <iframe
         width="700"
         height="400"
+        type="video/mp4"
         autoplay
         loop
         src={Vedio}
