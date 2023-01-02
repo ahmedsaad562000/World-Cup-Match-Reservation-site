@@ -71,7 +71,7 @@ def getseats(request , match_id):
 @api_view(['GET'])
 def stadiumsList(request):
     Stadiums =  stadiumview.objects.all();
-    serializer = StadiumsSerializer(Stadiums, many=True)
+    serializer = Stadiums_Names_Serializer(Stadiums, many=True)
     return Response(serializer.data)
 
 
@@ -104,6 +104,7 @@ def AddStadium(request):
 
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST);
+
 
 
 @api_view(['POST'])
@@ -156,7 +157,6 @@ def AddMatch(request):
 
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST);
-
 @api_view(['POST'])
 def UpdateMatch(request , match_id):
     try:
@@ -169,20 +169,39 @@ def UpdateMatch(request , match_id):
     #serializer.initial_data['id']=match.id
     #print(serializer.initial_data['id'])
     if serializer.is_valid():
+
         new_match_time = serializer.validated_data.get('time');
         new_match_date = serializer.validated_data.get('date');
+        h_team_name = serializer.validated_data.get('h_team')
+        a_team_name = serializer.validated_data.get('a_team')
+        h_teamobj = teamsview.objects.get(name=h_team_name);
+        a_teamobj = teamsview.objects.get(name=a_team_name);
+        #########################################################
+        #1- no team of the two teams has match in the same day
+        #########################################################
+        first_clashing_matches = matchview.objects.filter(Q(date=new_match_date) , Q(a_team=h_teamobj) | Q(h_team=h_teamobj) | Q(h_team=a_teamobj) | Q(a_team=a_teamobj));
+        if first_clashing_matches.count() > 0:
+            for k in first_clashing_matches:
+                if k != match:
+                    return Response(status=status.HTTP_401_UNAUTHORIZED)
         start = datetime(2000, 1, 1,hour=new_match_time.hour, minute=new_match_time.minute, second=new_match_time.second)
         curr_match_stadium_name = serializer.validated_data.get('stadium')
         curr_match_stadium = stadiumview.objects.get(name=curr_match_stadium_name)
         time_upper_bound = (start+timedelta(hours=3)).time();
         time_lower_bound = (start-timedelta(hours=3)).time();
-        clashing_matches1 = matchview.objects.filter(date=curr_match_date ,stadium=curr_match_stadium , time__gte=start.time() , time__lt=time_upper_bound)
-        clashing_matches = matchview.objects.filter(date=curr_match_date ,stadium=curr_match_stadium , time__lte=start.time() , time__gt=time_lower_bound)
-
+        clashing_matches1 = matchview.objects.filter(date=new_match_date ,stadium=curr_match_stadium , time__gte=start.time() , time__lt=time_upper_bound)
+        clashing_matches = matchview.objects.filter(date=new_match_date ,stadium=curr_match_stadium , time__lt=start.time(), time__gt=time_lower_bound)
+        # check=False;
+        if clashing_matches.count() >0:
+            for i in clashing_matches:
+                if i != match:
+                    return Response(status=status.HTTP_403_FORBIDDEN)
+        for j in clashing_matches1:
+            if j != match:
+                return Response(status=status.HTTP_403_FORBIDDEN)
         serializer.save()
         return Response(status=status.HTTP_200_OK)
     else:
-        #print(serializer.data['id'])
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
