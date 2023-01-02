@@ -298,7 +298,7 @@ function EditUser(props) {
                             <option value="northern irish">Northern Irish</option>
                             <option value="norwegian">Norwegian</option>
                             <option value="omani">Omani</option>
-                            <option value="omani">Palestine</option>
+                            <option value="Palestine">Palestine</option>
                             <option value="pakistani">Pakistani</option>
                             <option value="palauan">Palauan</option>
                             <option value="panamanian">Panamanian</option>
