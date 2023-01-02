@@ -202,6 +202,7 @@ def UpdateMatch(request , match_id):
 
         ########################################################
         #valid
+        serializer.save()
         if (curr_match_stadium != match.stadium):
             #delete old tickets
             old_stad_tickets = ticketsview.objects.filter(match=match)
@@ -209,7 +210,7 @@ def UpdateMatch(request , match_id):
                 old_stad_tickets.delete();
             #add new tickets
             #############################################################
-            serializer.save()
+            
             #############################################################
             new_match = matchview.objects.get(date=new_match_date , time=new_match_time , stadium =curr_match_stadium);
             rowseses = curr_match_stadium.rows;
