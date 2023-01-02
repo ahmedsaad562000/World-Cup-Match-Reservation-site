@@ -202,8 +202,9 @@ def UpdateMatch(request , match_id):
 
         ########################################################
         #valid
+        check_match_stad = match.stadium
         serializer.save()
-        if (curr_match_stadium != match.stadium):
+        if (curr_match_stadium != check_match_stad):
             #delete old tickets
             old_stad_tickets = ticketsview.objects.filter(match=match)
             for i in old_stad_tickets:
