@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Reservation from '../Components/meetups/CinemaMode';
 import Spinner from 'react-bootstrap/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 
 function Seats() {
+
+  const history = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
@@ -29,11 +32,20 @@ function Seats() {
       `http://localhost:8000/api/seats/${matchID}`
     )
       .then((response) => {
-        return response.json();
+        if(response.status === 405)
+        {
+          
+          alert(` The date is old ` );
+          history('/Matches');
+
+        }
+        else{
+        return response.json();}
       })
       .then((data) => {
         const meetups = [];
-
+  
+        
         for (const key in data) {
           const meetup = {
             id: key,
@@ -43,8 +55,10 @@ function Seats() {
           meetups.push(meetup);
         }
 
+
         setIsLoading(false);
         setLoadedMeetups(meetups);
+      
       });
   }, []);
 

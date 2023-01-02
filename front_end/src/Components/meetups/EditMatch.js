@@ -23,6 +23,10 @@ function EditMatch(props) {
       else if (res.status === 403) {
         alert(" There is a clashing match at same stadium ");
       }
+      else if(res.status === 405)
+      {
+        alert(` The date is old ` );
+      }
       else if (res.status === 200) {
         history('/Matches');
         props.onConfirm();
