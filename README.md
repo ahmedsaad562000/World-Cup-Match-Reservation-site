@@ -16,7 +16,8 @@ Both Frontend and Backend are added to this repositry
 In world cup folder Start your own local or global server using django and add <b>".../api"</b> to access the api's documentation of the All The *APIs* of the backend 
 
 
-<h4>Some videos are added for the functionality of the site too.</h4>
-        
+<h4>A video for the website functionality: </h4>
+
+https://youtu.be/_HusDycVZPE        
 
     
