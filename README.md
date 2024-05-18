@@ -18,6 +18,10 @@ In world cup folder Start your own local or global server using django and add <
 
 <h4>A video for the website functionality: </h4>
 
-https://youtu.be/_HusDycVZPE        
+[![Watch the video](https://img.youtube.com/vi/)](https://github.com/ahmedsaad562000/World-Cup-Match-Reservation-site/assets/76961547/1aaeb2f3-42da-48fb-bed7-041a5246eb54)        
 
     
+
+
+
+
